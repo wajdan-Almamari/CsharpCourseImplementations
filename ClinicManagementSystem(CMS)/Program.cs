@@ -12,7 +12,7 @@ namespace ClinicManagementSystem_CMS_
             int p1Age = 0; 
             string p1Phone = ""; 
             bool p1Active = false;
-
+           
 
             //rejon 2 : system processing ( menu functions )
             bool backToMainP = false;
@@ -212,6 +212,8 @@ namespace ClinicManagementSystem_CMS_
                                 case 0: // 0. Back to Main Menu
                                     EnterChoisePa = true;
                                     break;
+
+                             
                             }
                             Console.WriteLine("Press Enter Any Key to continue...");
                             Console.ReadLine();
@@ -223,6 +225,7 @@ namespace ClinicManagementSystem_CMS_
 
                     case 2://2. Appointment Management
                         Console.WriteLine("1.Book New Appointment");
+
                         break;
                     case 3: //3. Exit  
                         backToMainP = true; 
