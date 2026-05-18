@@ -103,10 +103,12 @@ namespace HotelManagementSystem
                         }
                         else
                         {
-                            Console.WriteLine("Enter Number of Nights : ");
+                            Console.Write("Enter Number of Nights : ");
                             numOfNight=int.Parse(Console.ReadLine());
+                       
                             checkinDate = DateTime.Now;
-                            checkoutDate = DateTime.Today;
+                            checkoutDate = DateTime.Today.AddDays(numOfNight);
+                            
                             Console.WriteLine("Check-In Date: " + checkinDate);
                             Console.WriteLine("Check-Out Date: " + checkoutDate);
 
