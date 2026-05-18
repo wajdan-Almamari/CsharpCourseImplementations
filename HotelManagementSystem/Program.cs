@@ -31,18 +31,18 @@ namespace HotelManagementSystem
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("-------Hotel Management System-------");
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("   0.Register New Guest");
-            Console.WriteLine("   1.View Guest Information");
-            Console.WriteLine("   2.Check-In Guest");
-            Console.WriteLine("   3.Check-Out & Bil");
-            Console.WriteLine("   4.Apply Discount");
-            Console.WriteLine("   5.Upgrade Room");
-            Console.WriteLine("   6.Add Room Service Note");
-            Console.WriteLine("   7.Search Guest by Name");
-            Console.WriteLine("   8.Calculate Loyalty Points");
-            Console.WriteLine("   9.Print Receipt");
-            Console.WriteLine("   10.Edit Guest Name");
-            Console.WriteLine("   11.Exit");
+            Console.WriteLine("0.Register New Guest");
+            Console.WriteLine("1.View Guest Information");
+            Console.WriteLine("2.Check-In Guest");
+            Console.WriteLine("3.Check-Out & Bill");
+            Console.WriteLine("4.Apply Discount");
+            Console.WriteLine("5.Upgrade Room");
+            Console.WriteLine("6.Add Room Service Note");
+            Console.WriteLine("7.Search Guest by Name");
+            Console.WriteLine("8.Calculate Loyalty Points");
+            Console.WriteLine("9.Print Receipt");
+            Console.WriteLine("10.Edit Guest Name");
+            Console.WriteLine("11.Exit");
             Console.WriteLine("-------------------------------------");
             Console.Write(" Enter your choice: ");
 
@@ -115,7 +115,21 @@ namespace HotelManagementSystem
                         }
                         break;
                     case 3://3.Check-Out & Bil
-                        Console.WriteLine();
+                        Console.WriteLine("------------------------------------");
+                        Console.WriteLine("   3.Check-Out & Bill");
+                        Console.WriteLine("------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            double totalBill = nightlyRate * numOfNight;
+                            double discountAmount = totalBill * (discountPercentage / 100);
+                            Console.WriteLine("Total Bill: " + Math.Round(totalBill));
+                            isGuestRegist = false;
+
+                        }
                         break;
                     case 4:// 4.Apply Discount
                         Console.WriteLine();
