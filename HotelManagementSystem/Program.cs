@@ -51,7 +51,7 @@ namespace HotelManagementSystem
                 switch (EnterChoise)
                 {
                     case 0://0.Register New Guest
-                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("------------------------------------");
                         Console.WriteLine("   0.Register New Guest");
                         Console.WriteLine("-------------------------------------");
                         Console.Write("Enter gust Name : ");
@@ -61,9 +61,11 @@ namespace HotelManagementSystem
                         Console.Write("Enter Room Type (S/D/F) : ");
                         roomType=char.Parse(Console.ReadLine());
                         Console.Write("Enter your Nightly Rate : ");
-                        nightlyRate = Convert.ToInt32(Console.ReadLine());
-                        Random random = new Random();
-                        roomNum = random.Next(1, 20);
+                        nightlyRate = double.Parse(Console.ReadLine());
+                        
+                        roomNum  = new Random().Next(1,20);
+                        //Random random = new Random();
+                        //roomNum = random.Next(1, 20);
 
                         isGuestRegist = true;
 
@@ -73,7 +75,23 @@ namespace HotelManagementSystem
                         
                         break;
                     case 1://1.View Guest Information
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("   1.View Guest Information");
+                        Console.WriteLine("-------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("No guest information found.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Guest Name: " + gName.ToUpper());
+                            Console.WriteLine("Guest Phone: " + gPhone);
+                            Console.WriteLine("Room Number: " + Convert.ToString(roomNum));
+                            Console.WriteLine("Room Type : " + roomType);
+                            Console.WriteLine("Nightly Rate : " + Math.Round(nightlyRate));
+
+                        }
+                      
                         break;
                     case 2:// 2.Check-In Guest
                         Console.WriteLine();
@@ -103,11 +121,14 @@ namespace HotelManagementSystem
                         Console.WriteLine();
                         break;
                     case 11://11.Exit
-                        Console.WriteLine();
+                        exit=true;
+
                         break;
                 }//end of switch
 
-
+                Console.WriteLine("press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
 
             }//end of while
         }
