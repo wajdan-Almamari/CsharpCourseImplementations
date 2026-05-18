@@ -32,8 +32,8 @@ namespace ClinicManagementSystem_CMS_
                 {
 
                     case 1: // 1. Patient Management 
-                        bool EnterChoisePa = false;
-                        while(EnterChoisePa == false) { 
+                        bool exit = false;
+                        while(exit == false) { 
                         Console.WriteLine("================================");
                         Console.WriteLine(" 1. Add Patient Information");
                         Console.WriteLine(" 2. View  Patients Information");
@@ -210,7 +210,7 @@ namespace ClinicManagementSystem_CMS_
 
                                     break;
                                 case 0: // 0. Back to Main Menu
-                                    EnterChoisePa = true;
+                                    exit = true;
                                     break;
 
                              
@@ -229,7 +229,7 @@ namespace ClinicManagementSystem_CMS_
                         break;
                     case 3: //3. Exit  
                         backToMainP = true; 
-                        break;
+                        break;   
                     default:
                         Console.WriteLine("================================");
                         Console.WriteLine("Invalid choice. Please try again.");
