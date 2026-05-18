@@ -14,8 +14,8 @@ namespace HotelManagementSystem
             int roomNum = 0;
             char roomType = ' ';
             double nightlyRate = 0;
-            string checkinDate = "";
-            string checkoutDate = "";
+            DateTime checkinDate ;
+            DateTime checkoutDate ;
             int numOfNight = 0;
             string roomNote = "";
             double discountPercentage = 0;
@@ -94,7 +94,23 @@ namespace HotelManagementSystem
                       
                         break;
                     case 2:// 2.Check-In Guest
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("   2.Check-In Guest");
+                        Console.WriteLine("-------------------------------------");
+                        if(isGuestRegist== false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter Number of Nights : ");
+                            numOfNight=int.Parse(Console.ReadLine());
+                            checkinDate = DateTime.Now;
+                            checkoutDate = DateTime.Today;
+                            Console.WriteLine("Check-In Date: " + checkinDate);
+                            Console.WriteLine("Check-Out Date: " + checkoutDate);
+
+                        }
                         break;
                     case 3://3.Check-Out & Bil
                         Console.WriteLine();
