@@ -269,9 +269,38 @@ namespace HotelManagementSystem
                         break;
                     case 9://9.Print Receipt
                         Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("9.Print Receipt");
+                        Console.WriteLine("-------------------------------------");
+                        string receipt;
+                        
+                        
                         break;
                     case 10://10.Edit Guest Name
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("10.Edit Guest Name");
+                        Console.WriteLine("-------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            string newName;
+                            Console.Write("Enter new guest name: ");
+                            newName = Console.ReadLine().Trim();
+                            if (newName.Length < 3)
+                            {
+                                Console.WriteLine("Name is too short.");
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("Uppercase Preview : " + newName.ToUpper());
+                                Console.WriteLine("Lowercase Preview : " + newName.ToLower());
+                                gName = newName;
+                                Console.WriteLine("Guest name updated successfully.");
+                            }
+                        }
                         break;
                     case 11://11.Exit
                         exit=true;
