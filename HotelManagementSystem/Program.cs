@@ -59,11 +59,11 @@ namespace HotelManagementSystem
                         Console.Write("Enter gust Phone : ");
                         gPhone = Console.ReadLine().Trim();
                         Console.Write("Enter Room Type (S/D/F) : ");
-                        roomType=char.Parse(Console.ReadLine());
+                        roomType = char.Parse(Console.ReadLine());
                         Console.Write("Enter your Nightly Rate : ");
                         nightlyRate = double.Parse(Console.ReadLine());
-                        
-                        roomNum  = new Random().Next(1,20);
+
+                        roomNum = new Random().Next(1, 20);
                         //Random random = new Random();
                         //roomNum = random.Next(1, 20);
 
@@ -71,8 +71,8 @@ namespace HotelManagementSystem
 
                         Console.WriteLine("Guest registered successfully.");
                         Console.WriteLine("Room Number: " + roomNum);
-                        
-                        
+
+
                         break;
                     case 1://1.View Guest Information
                         Console.WriteLine("-------------------------------------");
@@ -91,24 +91,24 @@ namespace HotelManagementSystem
                             Console.WriteLine("Nightly Rate : " + Math.Round(nightlyRate));
 
                         }
-                      
+
                         break;
                     case 2:// 2.Check-In Guest
                         Console.WriteLine("-------------------------------------");
                         Console.WriteLine("   2.Check-In Guest");
                         Console.WriteLine("-------------------------------------");
-                        if(isGuestRegist== false)
+                        if (isGuestRegist == false)
                         {
                             Console.WriteLine("Please register guest first.");
                         }
                         else
                         {
                             Console.Write("Enter Number of Nights : ");
-                            numOfNight=int.Parse(Console.ReadLine());
-                       
+                            numOfNight = int.Parse(Console.ReadLine());
+
                             checkinDate = DateTime.Now;
                             checkoutDate = DateTime.Today.AddDays(numOfNight);
-                            
+
                             Console.WriteLine("Check-In Date: " + checkinDate);
                             Console.WriteLine("Check-Out Date: " + checkoutDate);
 
@@ -135,30 +135,30 @@ namespace HotelManagementSystem
                         Console.WriteLine("-------------------------------------");
                         Console.WriteLine("4.Apply Discount");
                         Console.WriteLine("-------------------------------------");
-                        if(isGuestRegist == false)
+                        if (isGuestRegist == false)
                         {
                             Console.WriteLine("Please register guest first.");
 
                         }
                         else
                         {
-                          
-                                double orginAmount = nightlyRate * numOfNight;
 
-                                Console.Write("Enter discount percentage: ");
-                                discountPercentage = Convert.ToDouble(Console.ReadLine());
+                            double orginAmount = nightlyRate * numOfNight;
 
-                                double discountAmount = orginAmount * (discountPercentage / 100);
-                                double discountedAmount = orginAmount - discountAmount;
-                                double amountSaved = Math.Abs(discountAmount);
+                            Console.Write("Enter discount percentage: ");
+                            discountPercentage = Convert.ToDouble(Console.ReadLine());
 
-                                Console.WriteLine("Orginal Amount : " + Math.Round(orginAmount, 2));
-                                Console.WriteLine("Discount Amount : " + Math.Round(discountedAmount, 2));
-                                Console.WriteLine("Amount Saved : " + Math.Round(amountSaved, 2));
-                            
+                            double discountAmount = orginAmount * (discountPercentage / 100);
+                            double discountedAmount = orginAmount - discountAmount;
+                            double amountSaved = Math.Abs(discountAmount);
+
+                            Console.WriteLine("Orginal Amount : " + Math.Round(orginAmount, 2));
+                            Console.WriteLine("Discount Amount : " + Math.Round(discountedAmount, 2));
+                            Console.WriteLine("Amount Saved : " + Math.Round(amountSaved, 2));
+
                         }
                         break;
-                        
+
                     case 5://5.Upgrade Room
                         Console.WriteLine("-------------------------------------");
                         Console.WriteLine("5.Upgrade Room");
@@ -221,7 +221,29 @@ namespace HotelManagementSystem
 
                         break;
                     case 7://7.Search Guest by Name
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("7.Search Guest by Name");
+                        Console.WriteLine("-------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            string keyword;
+                            Console.Write("Enter search keyword: ");
+                            keyword = Console.ReadLine().Trim();
+
+                            if (gName.ToLower().Contains(keyword.ToLower()))
+                            {
+                                Console.WriteLine("Guest found.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Guest not found.");
+                            }
+                        }
+                
                         break;
                     case 8:// 8.Calculate Loyalty Points
                         Console.WriteLine();
