@@ -132,8 +132,33 @@ namespace HotelManagementSystem
                         }
                         break;
                     case 4:// 4.Apply Discount
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("4.Apply Discount");
+                        Console.WriteLine("-------------------------------------");
+                        if(isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+
+                        }
+                        else
+                        {
+                          
+                                double orginAmount = nightlyRate * numOfNight;
+
+                                Console.Write("Enter discount percentage: ");
+                                discountPercentage = Convert.ToDouble(Console.ReadLine());
+
+                                double discountAmount = orginAmount * (discountPercentage / 100);
+                                double discountedAmount = orginAmount - discountAmount;
+                                double amountSaved = Math.Abs(discountAmount);
+
+                                Console.WriteLine("Orginal Amount : " + Math.Round(orginAmount, 2));
+                                Console.WriteLine("Discount Amount : " + Math.Round(discountedAmount, 2));
+                                Console.WriteLine("Amount Saved : " + Math.Round(amountSaved, 2));
+                            
+                        }
                         break;
+                        
                     case 5://5.Upgrade Room
                         Console.WriteLine();
                         break;
