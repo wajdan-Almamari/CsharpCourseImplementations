@@ -160,7 +160,36 @@ namespace HotelManagementSystem
                         break;
                         
                     case 5://5.Upgrade Room
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("5.Upgrade Room");
+                        Console.WriteLine("-------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            char newRoomType;
+                            double newRate;
+
+                            Console.Write("Enter new room type (S/D/F): ");
+                            newRoomType = char.Parse(Console.ReadLine());
+
+                            Console.Write("Enter new nightly rate: ");
+                            newRate = Convert.ToDouble(Console.ReadLine());
+                            double higherRate = Math.Max(nightlyRate, newRate);
+                            double lowerRate = Math.Min(nightlyRate, newRate);
+                            double difference = Math.Abs(newRate - nightlyRate);
+                            Console.WriteLine("Higher Rate : " + Math.Round(higherRate, 2));
+                            Console.WriteLine("Lower Rate : " + Math.Round(lowerRate, 2));
+                            Console.WriteLine("Difference Per Night : " + Math.Round(difference, 2));
+
+                            roomType = newRoomType;
+                            nightlyRate = newRate;
+
+                            Console.WriteLine("Room upgraded successfully.");
+
+                        }
                         break;
                     case 6://6.Add Room Service Note
                         Console.WriteLine();
