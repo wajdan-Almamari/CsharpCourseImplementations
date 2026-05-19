@@ -287,18 +287,15 @@ namespace HotelManagementSystem
                                  "Room Number : {ROOM}\n" +
                                  "Printed Date : {DATE}\n" +
                                  "Checkin Date : {CHECKIN}\n" +
-                                 "Checkout Date : {CHECKOUT}\n";
+                                 "Checkout Date : {CHECKOUT}\n"+
+                                 "Total Bill : {BILL}\n";
 
                         receipt = receipt.Replace("{NAME}", gName);
-
                         receipt = receipt.Replace("{ROOM}", Convert.ToString(roomNum));
-
                         receipt = receipt.Replace("{DATE}", DateTime.Now.ToString());
-
                         receipt = receipt.Replace("{CHECKIN}", checkinDate.ToString());
-
                         receipt = receipt.Replace("{CHECKOUT}", checkoutDate.ToString());
-
+                       // receipt = receipt.Replace("{BILL}", Math.Round(totalBill, 2).ToString());
                         Console.WriteLine(receipt);
                         Console.WriteLine(line);
                         break;
