@@ -271,19 +271,25 @@ namespace HotelManagementSystem
                         Console.WriteLine("-------------------------------------");
                         Console.WriteLine("9.Print Receipt");
                         Console.WriteLine("-------------------------------------");
+
+                        string line = "";
+                        int count = 0;
+
+                        while (count < 50)
+                        {
+                            line = line + "-";
+                            count++;
+                        }
                         string receipt;
                         // Build receipt template
-                        receipt =
-                        "Guest Name : {NAME}\n" + 
-                        "Room Number : {ROOM}\n" + 
-                        "Printed Date : {DATE}";
+                        receipt = "Guest Name\n" + "Room Number\n" + "Printed Date\n";
   
-                        receipt = receipt.Replace("{NAME}", gName);
-                        receipt = receipt.Replace("{ROOM}", Convert.ToString(roomNum));
-                        receipt = receipt.Replace("{DATE}", DateTime.Now.ToString());
+                        receipt = receipt.Replace("Guest Name", gName);
+                        receipt = receipt.Replace("Room Number", Convert.ToString(roomNum));
+                        receipt = receipt.Replace("Printed Date", DateTime.Now.ToString());
 
                         Console.WriteLine(receipt);
-
+                        Console.WriteLine(line);
                         break;
                     case 10://10.Edit Guest Name
                         Console.WriteLine("-------------------------------------");
