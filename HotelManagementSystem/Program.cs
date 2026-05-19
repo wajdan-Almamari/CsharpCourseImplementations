@@ -246,10 +246,29 @@ namespace HotelManagementSystem
                 
                         break;
                     case 8:// 8.Calculate Loyalty Points
-                        Console.WriteLine();
+                        Console.WriteLine(" ");
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("8.Calculate Loyalty Points");
+                        Console.WriteLine("-------------------------------------");
+
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+
+                        else
+                        {
+                            double earnedPoints;
+                            earnedPoints = Math.Pow(numOfNight, 2);
+                            loyaltyPoints = loyaltyPoints + Convert.ToInt32(earnedPoints);
+
+                            Console.WriteLine("Earned Points : " + Math.Round(earnedPoints, 2));
+                            Console.WriteLine("Total Loyalty Points : " + loyaltyPoints);
+                        }
+
                         break;
                     case 9://9.Print Receipt
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
                         break;
                     case 10://10.Edit Guest Name
                         Console.WriteLine();
