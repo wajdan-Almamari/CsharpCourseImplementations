@@ -192,7 +192,33 @@ namespace HotelManagementSystem
                         }
                         break;
                     case 6://6.Add Room Service Note
-                        Console.WriteLine();
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("6.Add Room Service Note");
+                        Console.WriteLine("-------------------------------------");
+                        if (isGuestRegist == false)
+                        {
+                            Console.WriteLine("Please register guest first.");
+                        }
+                        else
+                        {
+                            string newNote;
+                            Console.Write("Enter room service note: ");
+                            newNote = Console.ReadLine().Trim();
+                            if (newNote == "")
+                            {
+                                Console.WriteLine("Note cannot be blank.");
+                            }
+                            else
+                            {
+                                roomNote = roomNote + newNote;
+
+                                roomNote = roomNote.Replace("dirty", "***");
+
+                                Console.WriteLine("Updated Notes : " + roomNote);
+                                Console.WriteLine("Total Notes Length : " + roomNote.Length);
+                            }
+                        }
+
                         break;
                     case 7://7.Search Guest by Name
                         Console.WriteLine();
