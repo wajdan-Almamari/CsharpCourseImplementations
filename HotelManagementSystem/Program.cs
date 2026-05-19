@@ -279,6 +279,7 @@ namespace HotelManagementSystem
                         Console.WriteLine("-------------------------------------");
                         Console.WriteLine("10.Edit Guest Name");
                         Console.WriteLine("-------------------------------------");
+
                         if (isGuestRegist == false)
                         {
                             Console.WriteLine("Please register guest first.");
@@ -303,7 +304,12 @@ namespace HotelManagementSystem
                         }
                         break;
                     case 11://11.Exit
-                        exit=true;
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("Thank you for using Hotel Management System");
+                        Console.WriteLine("Session Ended : " + DateTime.Now.ToString());
+                        Console.WriteLine("-------------------------------------");
+
+                        exit = true;
 
                         break;
                 }//end of switch
