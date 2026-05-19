@@ -14,8 +14,8 @@ namespace HotelManagementSystem
             int roomNum = 0;
             char roomType = ' ';
             double nightlyRate = 0;
-            DateTime checkinDate ;
-            DateTime checkoutDate ;
+            DateTime checkinDate = DateTime.Now;
+            DateTime checkoutDate = DateTime.Now;
             int numOfNight = 0;
             string roomNote = "";
             double discountPercentage = 0;
@@ -282,11 +282,22 @@ namespace HotelManagementSystem
                         }
                         string receipt;
                         // Build receipt template
-                        receipt = "Guest Name\n" + "Room Number\n" + "Printed Date\n";
-  
-                        receipt = receipt.Replace("Guest Name", gName);
-                        receipt = receipt.Replace("Room Number", Convert.ToString(roomNum));
-                        receipt = receipt.Replace("Printed Date", DateTime.Now.ToString());
+                        receipt =
+                                 "Guest Name : {NAME}\n" +
+                                 "Room Number : {ROOM}\n" +
+                                 "Printed Date : {DATE}\n" +
+                                 "Checkin Date : {CHECKIN}\n" +
+                                 "Checkout Date : {CHECKOUT}\n";
+
+                        receipt = receipt.Replace("{NAME}", gName);
+
+                        receipt = receipt.Replace("{ROOM}", Convert.ToString(roomNum));
+
+                        receipt = receipt.Replace("{DATE}", DateTime.Now.ToString());
+
+                        receipt = receipt.Replace("{CHECKIN}", checkinDate.ToString());
+
+                        receipt = receipt.Replace("{CHECKOUT}", checkoutDate.ToString());
 
                         Console.WriteLine(receipt);
                         Console.WriteLine(line);
