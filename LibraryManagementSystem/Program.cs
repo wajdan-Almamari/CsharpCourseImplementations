@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibraryManagementSystem
 {
@@ -77,7 +78,7 @@ namespace LibraryManagementSystem
         public static bool SearchBookByTitle(string keyword)
         {
 
-            Console.WriteLine(bookTitle.Substring(0, 1));
+            Console.WriteLine(bookTitle.Substring(0, bookTitle.Length));
             if (bookTitle.ToLower().Contains(keyword.ToLower()))
             {
                 return true;
@@ -87,14 +88,7 @@ namespace LibraryManagementSystem
         }
         public static void RegisterBook(string title,string author,int copies,string genre = "General")
         {
-            //optional parameter 
-            Console.Write("Enter Book Title : ");
-            title = Console.ReadLine();
-            Console.Write("Enter Book Author : ");
-            author = Console.ReadLine();
-            Console.Write("Enter Copies : ");
-            copies = int.Parse(Console.ReadLine());
-
+           
             bookTitle = title.Trim();
             bookAuthor = author.Trim();
             availableCopies = copies;
@@ -106,7 +100,7 @@ namespace LibraryManagementSystem
         }
         public static void BorrowBook(ref int copies)
         {
-            copies = Math.Max(0, copies - 1);
+            copies = Math.Max(0, copies - 1); //
             totalBooksBorrowedThisSession++;
 
             Console.WriteLine("Book Borrowed Successfully.");
@@ -119,7 +113,10 @@ namespace LibraryManagementSystem
             Console.WriteLine("Book Returned Successfully.");
             Console.WriteLine("Available Copies : " + copies);
         }
+        public static double CalculateLateFine(int over )
+        {
 
+        }
 
         //main methods
         static void Main(string[] args)
@@ -179,7 +176,7 @@ namespace LibraryManagementSystem
 
                             if (SearchBookByTitle(keyword))
                             {
-                                Console.WriteLine("Book Found");
+                                Console.WriteLine("Book Found:    " + bookTitle);
                             }
                             else
                             {
@@ -213,6 +210,9 @@ namespace LibraryManagementSystem
                         break;
                     case 5://5.Calculate Late Fine
                         Console.WriteLine("5.Calculate Late Fine  ");
+                        
+
+                        
                         break;
                     case 6://6.Apply Member Discount
                         Console.WriteLine("6.Apply Member Discount ");
@@ -224,8 +224,16 @@ namespace LibraryManagementSystem
                         Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("8.Register Book ");
                         Console.WriteLine("///////////////////////////////////");
-                        
-                        RegisterBook(bookTitle,bookAuthor, availableCopies);
+
+                        //optional parameter 
+                        Console.Write("Enter Book Title : ");
+                       string title = Console.ReadLine();
+                        Console.Write("Enter Book Author : ");
+                       string author = Console.ReadLine();
+                        Console.Write("Enter Copies : ");
+                      int copies = int.Parse(Console.ReadLine());
+
+                        RegisterBook(title,author, copies);
                         break;
                     case 9://9.Generate Member ID
                         Console.WriteLine("9.Generate Member ID ");
