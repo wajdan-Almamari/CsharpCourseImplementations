@@ -46,13 +46,10 @@ namespace LibraryManagementSystem
             Console.Write(" Enter your choice: ");
 
         }
-        public static DateTime GetTodaysDate()
-        {
-            //return type is DateTime , no parametrs
-            return DateTime.Now;
-        }
+  
         public static void RegisterMember()
         {
+            //void — no parameters 
             Console.Write("Enter Member Name :");
             memberName = Console.ReadLine(); 
             Console.Write("Enter member email :");
@@ -77,8 +74,55 @@ namespace LibraryManagementSystem
             Console.WriteLine("Expiry Date : " + membershipExpiryDate.PadLeft(20));
             Console.WriteLine("Member Tier : " + memberTier.PadLeft(20));
         }
-            //main methods
-            static void Main(string[] args)
+        public static bool SearchBookByTitle(string keyword)
+        {
+
+            Console.WriteLine(bookTitle.Substring(0, 1));
+            if (bookTitle.ToLower().Contains(keyword.ToLower()))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static void RegisterBook(string title,string author,int copies,string genre = "General")
+        {
+            //optional parameter 
+            Console.Write("Enter Book Title : ");
+            title = Console.ReadLine();
+            Console.Write("Enter Book Author : ");
+            author = Console.ReadLine();
+            Console.Write("Enter Copies : ");
+            copies = int.Parse(Console.ReadLine());
+
+            bookTitle = title.Trim();
+            bookAuthor = author.Trim();
+            availableCopies = copies;
+            bookGenre = genre.Trim();
+
+            isBookRegistered = true;
+
+            Console.WriteLine("Book Registered Successfully.");
+        }
+        public static void BorrowBook(ref int copies)
+        {
+            copies = Math.Max(0, copies - 1);
+            totalBooksBorrowedThisSession++;
+
+            Console.WriteLine("Book Borrowed Successfully.");
+            Console.WriteLine("Available Copies : " + copies);
+        }
+
+        public static void ReturnBook(ref int copies)
+        {
+            copies = copies + 1;
+            Console.WriteLine("Book Returned Successfully.");
+            Console.WriteLine("Available Copies : " + copies);
+        }
+
+
+        //main methods
+        static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -117,14 +161,55 @@ namespace LibraryManagementSystem
                             DisplayMemberProfile();
                         }
                         break;
+
                     case 2://2.Search Book by Title 
-                        Console.WriteLine("2.Search Book by Title ");
+                        Console.WriteLine("///////////////////////////////////");
+                        Console.WriteLine("Search Book by Title ");
+                        Console.WriteLine("///////////////////////////////////");
+                        Console.Write("Enter keyword : ");
+                        string keyword = Console.ReadLine();
+
+                        if (isBookRegistered == false)
+                        {
+                            Console.WriteLine("No book registered.");
+                        }
+                        else
+                        {
+                           
+
+                            if (SearchBookByTitle(keyword))
+                            {
+                                Console.WriteLine("Book Found");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Book Not Found");
+                            }
+                        }
                         break;
                     case 3://3.Borrow a Book
                         Console.WriteLine("3.Borrow a Book ");
+                        if (isBookRegistered ==false)
+                        {
+                            Console.WriteLine("No book registered.");
+                        }
+                        else
+                        {
+                            BorrowBook(ref availableCopies);
+                        }
+
                         break;
+                   
                     case 4://4.Return a Book
                         Console.WriteLine("4.Return a Book  ");
+                        if (isBookRegistered ==false)
+                        {
+                            Console.WriteLine("No book registered.");
+                        }
+                        else
+                        {
+                            ReturnBook(ref availableCopies);
+                        }
                         break;
                     case 5://5.Calculate Late Fine
                         Console.WriteLine("5.Calculate Late Fine  ");
@@ -136,7 +221,11 @@ namespace LibraryManagementSystem
                         Console.WriteLine("7.Check Borrowing Eligibility ");
                         break;
                     case 8://8.Register Book
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("8.Register Book ");
+                        Console.WriteLine("///////////////////////////////////");
+                        
+                        RegisterBook(bookTitle,bookAuthor, availableCopies);
                         break;
                     case 9://9.Generate Member ID
                         Console.WriteLine("9.Generate Member ID ");
@@ -157,7 +246,11 @@ namespace LibraryManagementSystem
                         Console.WriteLine("14.Exit  ");
                         exit = true;
                         break;
-                   
+                    default:
+                        Console.WriteLine("///////////////////////////////////");
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+
 
                 }//end of switch
                 Console.WriteLine("press any key to continue...");
