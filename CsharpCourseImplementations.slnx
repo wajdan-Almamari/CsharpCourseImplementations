@@ -3,4 +3,5 @@
   <Project Path="ClinicManagementSystem(CMS)/ClinicManagementSystem(CMS).csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
   <Project Path="HotelManagementSystem/HotelManagementSystem.csproj" Id="ad861b22-57d5-4e74-b04c-40ca30e1b9e1" />
+  <Project Path="LibraryManagementSystem/LibraryManagementSystem.csproj" Id="435ddc6b-6f5a-445d-9eab-1ceabee59d77" />
 </Solution>
