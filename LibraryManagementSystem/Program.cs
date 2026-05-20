@@ -20,6 +20,7 @@ namespace LibraryManagementSystem
         static bool isBookRegistered = false;
         static int totalBooksBorrowedThisSession = 0;
         static double totalFinesPaidThisSession = 0;
+        
 
         public static void PrintMenuStyle()
         { //PrintMenu-style functions 
@@ -45,10 +46,39 @@ namespace LibraryManagementSystem
             Console.Write(" Enter your choice: ");
 
         }
+        public static DateTime GetTodaysDate()
+        {
+            //return type is DateTime , no parametrs
+            return DateTime.Now;
+        }
+        public static void RegisterMember()
+        {
+            Console.Write("Enter Member Name :");
+            memberName = Console.ReadLine(); 
+            Console.Write("Enter member email :");
+            memberEmail = Console.ReadLine();
+            Console.Write("Enter membership expiry date :");
+            membershipExpiryDate = Console.ReadLine();
+            Console.Write("Enter member tier :");
+            memberTier = Console.ReadLine();
+            isMemberRegistered = true;
 
-
-        //main methods
-        static void Main(string[] args)
+            memberID = new Random().Next(100000, 200000);
+            Console.WriteLine("///////////////////////////////////");
+            Console.WriteLine("Member Registered Successfully... " + memberName.Substring(0,5).ToUpper());
+            Console.WriteLine("ID Member : " + memberID);
+            Console.WriteLine("Date and Time : " + DateTime.Now);
+        }
+        public static void DisplayMemberProfile()
+        {
+            Console.WriteLine("Member Name : " + memberName.PadLeft(20));
+            Console.WriteLine("Member ID : "  + Convert.ToString(memberID).PadLeft(20));
+            Console.WriteLine("Member Email : " + memberEmail.PadLeft(20));
+            Console.WriteLine("Expiry Date : " + membershipExpiryDate.PadLeft(20));
+            Console.WriteLine("Member Tier : " + memberTier.PadLeft(20));
+        }
+            //main methods
+            static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -61,9 +91,31 @@ namespace LibraryManagementSystem
                     case 0://0.Register Member
                         Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("0.Register Member ");
-                        break;
+                        Console.WriteLine("///////////////////////////////////");
+                        if (isMemberRegistered)
+                        {
+                            Console.WriteLine("A member is already registered.");
+                        }
+                        else
+                        {
+                            RegisterMember();
+                          
+                        }
+
+                    break;
                     case 1://1.Display Member Profile
-                        Console.WriteLine("1.Display Member Profile ");
+                        Console.WriteLine("///////////////////////////////////");
+                        Console.WriteLine(" Member Profile ");
+                        Console.WriteLine("///////////////////////////////////");
+                        if (isMemberRegistered == false)
+                        {
+                            Console.WriteLine("No member registered.");
+                          
+                        }
+                        else
+                        {
+                            DisplayMemberProfile();
+                        }
                         break;
                     case 2://2.Search Book by Title 
                         Console.WriteLine("2.Search Book by Title ");
