@@ -113,8 +113,15 @@ namespace LibraryManagementSystem
             Console.WriteLine("Book Returned Successfully.");
             Console.WriteLine("Available Copies : " + copies);
         }
-        public static double CalculateLateFine(int over )
+
+        public static double CalculateLateFine(int overdueDays)
         {
+            // Calculates the late fine based on overdue days
+            Console.Write("Enter overdue days : ");
+            double fine = Math.Sqrt(overdueDays) * 2;// Calculate fine using square root
+            fine = Math.Round(fine, 2);// Round the result to 2 decimal places
+
+            return fine;// Return the final fine amount
 
         }
 
@@ -210,9 +217,12 @@ namespace LibraryManagementSystem
                         break;
                     case 5://5.Calculate Late Fine
                         Console.WriteLine("5.Calculate Late Fine  ");
-                        
+                        Console.Write("Enter overdue days : ");
+                        int overdueDays = int.Parse(Console.ReadLine());
+                        double fine = CalculateLateFine(overdueDays);
+                        Console.WriteLine("Late Fine : " + fine);
 
-                        
+
                         break;
                     case 6://6.Apply Member Discount
                         Console.WriteLine("6.Apply Member Discount ");
