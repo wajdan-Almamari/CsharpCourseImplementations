@@ -125,6 +125,31 @@ namespace LibraryManagementSystem
 
         }
 
+        // Applies default discount
+        public static double ApplyDiscount(double amount)
+        {
+            double finalAmount = amount -(amount * 0.10); // Apply a 10% discount
+            return Math.Round(finalAmount, 2); // Round the result to 2 decimal places
+
+        }
+        // Applies discount based on member tier
+        public static double ApplyDiscount(double amount, string tier)
+        {
+            tier = tier.ToUpper(); // Convert tier to uppercase
+            double discount = 0.10;
+
+            // Gold members get 20% discount
+            if (tier == "GOLD") {
+               discount = 0.20;
+            }
+            // Calculate discounted amount
+            double finalAmount = amount - (amount * discount);
+
+            // Return rounded result
+            return Math.Round(finalAmount, 2);
+
+        }
+        
         //main methods
         static void Main(string[] args)
         {
@@ -226,6 +251,13 @@ namespace LibraryManagementSystem
                         break;
                     case 6://6.Apply Member Discount
                         Console.WriteLine("6.Apply Member Discount ");
+                        Console.Write("Enter amount : ");
+                        double amount = double.Parse(Console.ReadLine());
+
+                        Console.Write("Enter member tier : ");
+                        string tier = Console.ReadLine();
+                        double finalAmount = ApplyDiscount(amount, tier);
+                        Console.WriteLine("Discounted Amount : " + finalAmount);
                         break;
                     case 7://7.Check Borrowing Eligibility 
                         Console.WriteLine("7.Check Borrowing Eligibility ");
