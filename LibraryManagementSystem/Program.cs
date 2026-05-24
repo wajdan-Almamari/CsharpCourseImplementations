@@ -149,9 +149,19 @@ namespace LibraryManagementSystem
             return Math.Round(finalAmount, 2);
 
         }
-        
-        //main methods
-        static void Main(string[] args)
+        public static bool CheckBorrowingEligibility(string expiryDate)
+        {
+            // Convert string to DateTime
+            DateTime expiry = DateTime.Parse(expiryDate);
+            // Compare expiry date with today's date
+            if (expiry >= DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
+            //main methods
+            static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -261,6 +271,15 @@ namespace LibraryManagementSystem
                         break;
                     case 7://7.Check Borrowing Eligibility 
                         Console.WriteLine("7.Check Borrowing Eligibility ");
+                        if (CheckBorrowingEligibility(membershipExpiryDate))
+                        {
+                            Console.WriteLine("Member is eligible to borrow.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Membership expired.");
+                        }
+
                         break;
                     case 8://8.Register Book
                         Console.WriteLine("///////////////////////////////////");
