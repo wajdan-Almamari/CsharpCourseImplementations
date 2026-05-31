@@ -113,10 +113,7 @@ namespace LibraryManagementSystem
             Console.WriteLine("Book Returned Successfully.");
             Console.WriteLine("Available Copies : " + copies);
         }
-        public static double CalculateLateFine(int over )
-        {
 
-        }
 
         //main methods
         static void Main(string[] args)
