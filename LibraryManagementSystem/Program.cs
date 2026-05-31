@@ -174,6 +174,14 @@ namespace LibraryManagementSystem
 
             return memberID;
         }
+        // Displays book details
+        public static void DisplayBookDetails (string title, string author,  string genre,int copies )
+        {
+            Console.WriteLine("Book Title : ".PadRight(20) + title);
+            Console.WriteLine("Book Author : ".PadRight(20) + author);
+            Console.WriteLine("Book Genre : ".PadRight(20) + genre);
+            Console.WriteLine("Available Copies : ".PadRight(20) + Convert.ToString(copies));
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -315,6 +323,7 @@ namespace LibraryManagementSystem
                         break;
                     case 10://10.Display Book Details
                         Console.WriteLine("10.Display Book Details  ");
+                            DisplayBookDetails( title: bookTitle,author: bookAuthor,genre: bookGenre,copies: availableCopies);
                         break;
                     case 11://11.Calculate Renewal Fee
                         Console.WriteLine("11.Calculate Renewal Fee  ");
