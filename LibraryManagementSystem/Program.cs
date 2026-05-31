@@ -160,8 +160,21 @@ namespace LibraryManagementSystem
             }
             return false;
         }
-            //main methods
-            static void Main(string[] args)
+
+        // Generate a unique member ID
+        // Generates a unique member ID
+        public static string GenerateMemberID()
+        {
+            // Take first 3 letters from member name
+            string namePart = memberName.Substring(0, 3).ToUpper();
+            // Apply mathematical operation on timestamp
+            double number = Math.Sqrt(DateTime.Now.Millisecond);
+            // Combine name and number
+            string memberID = namePart + ((int)number);
+
+            return memberID;
+        }
+        static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -298,6 +311,7 @@ namespace LibraryManagementSystem
                         break;
                     case 9://9.Generate Member ID
                         Console.WriteLine("9.Generate Member ID ");
+                        Console.WriteLine("Generated Member ID : " + GenerateMemberID());
                         break;
                     case 10://10.Display Book Details
                         Console.WriteLine("10.Display Book Details  ");
