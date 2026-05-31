@@ -182,6 +182,28 @@ namespace LibraryManagementSystem
             Console.WriteLine("Book Genre : ".PadRight(20) + genre);
             Console.WriteLine("Available Copies : ".PadRight(20) + Convert.ToString(copies));
         }
+        // Calculates renewal fee for standard members
+        public static double CalculateRenewalFee(int renewalDays)
+        {
+            double fee = renewalDays * 0.5;
+
+            // Round fee up to nearest whole number
+            return Math.Ceiling(fee);
+        }
+
+        // Calculates renewal fee for premium members
+        public static double CalculateRenewalFee(int renewalDays, bool isPremium)
+        {
+            double fee = renewalDays * 0.5;
+            // Premium members pay half the fee
+            if (isPremium)
+            {
+                fee = fee / 2;
+            }
+
+            // Round fee up to nearest whole number
+            return Math.Ceiling(fee);
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -327,6 +349,14 @@ namespace LibraryManagementSystem
                         break;
                     case 11://11.Calculate Renewal Fee
                         Console.WriteLine("11.Calculate Renewal Fee  ");
+                        Console.Write("Enter renewal days : ");
+                        int renewalDays = int.Parse(Console.ReadLine());
+                        Console.Write("Is Premium Member? (true/false) : ");
+                        bool isPremium = bool.Parse(Console.ReadLine());
+                        double fee = CalculateRenewalFee(renewalDays, isPremium);
+
+                        Console.WriteLine("Renewal Fee : " + fee);
+
                         break;
                     case 12://12.Update Member Email
                         Console.WriteLine("12.Update Member Email  ");
