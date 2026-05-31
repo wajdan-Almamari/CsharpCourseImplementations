@@ -210,8 +210,6 @@ namespace LibraryManagementSystem
             // Remove extra spaces
             cleanedEmail = newEmail.Trim();
 
-        }
-
             return false;
         }
         // Displays session summary
