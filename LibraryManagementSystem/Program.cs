@@ -218,6 +218,15 @@ namespace LibraryManagementSystem
 
             return false;
         }
+        // Displays session summary
+        public static void SessionSummary()
+        {
+            Console.WriteLine("========== Session Summary ==========");
+            Console.WriteLine("Member Name : " + memberName);
+            Console.WriteLine("Books Borrowed : "   + Convert.ToString(totalBooksBorrowedThisSession));
+            Console.WriteLine("Total Fines Paid : "  + Convert.ToString(Math.Round(totalFinesPaidThisSession, 2)));
+            Console.WriteLine("Current Date & Time : "   + DateTime.Now);
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -393,6 +402,7 @@ namespace LibraryManagementSystem
                         break;
                     case 13://13.Session Summary
                         Console.WriteLine("13.Session Summary   ");
+                        SessionSummary();
                         break;
                     case 14://14.Exit
                         Console.WriteLine("14.Exit  ");
