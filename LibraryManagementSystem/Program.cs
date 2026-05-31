@@ -204,6 +204,20 @@ namespace LibraryManagementSystem
             // Round fee up to nearest whole number
             return Math.Ceiling(fee);
         }
+        // Validates and updates member email
+        public static bool UpdateMemberEmail(string newEmail, out string cleanedEmail)
+        {
+            // Remove extra spaces
+            cleanedEmail = newEmail.Trim();
+
+            // Check email validity
+            if (cleanedEmail.Contains("@") && cleanedEmail.Length >= 5)
+            {
+                return true;
+            }
+
+            return false;
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -360,6 +374,22 @@ namespace LibraryManagementSystem
                         break;
                     case 12://12.Update Member Email
                         Console.WriteLine("12.Update Member Email  ");
+                        Console.Write("Enter New Email : ");
+
+                        string newEmail = Console.ReadLine();
+
+                        string cleanedEmail;
+
+                        if (UpdateMemberEmail(newEmail, out cleanedEmail))
+                        {
+                            memberEmail = cleanedEmail;
+
+                            Console.WriteLine("Email Updated Successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Email.");
+                        }
                         break;
                     case 13://13.Session Summary
                         Console.WriteLine("13.Session Summary   ");
