@@ -114,8 +114,115 @@ namespace LibraryManagementSystem
             Console.WriteLine("Available Copies : " + copies);
         }
 
+        public static double CalculateLateFine(int overdueDays)
+        {
+            // Calculates the late fine based on overdue days
+            Console.Write("Enter overdue days : ");
+            double fine = Math.Sqrt(overdueDays) * 2;// Calculate fine using square root
+            fine = Math.Round(fine, 2);// Round the result to 2 decimal places
 
-        //main methods
+            return fine;// Return the final fine amount
+
+        }
+
+        // Applies default discount
+        public static double ApplyDiscount(double amount)
+        {
+            double finalAmount = amount -(amount * 0.10); // Apply a 10% discount
+            return Math.Round(finalAmount, 2); // Round the result to 2 decimal places
+
+        }
+        // Applies discount based on member tier
+        public static double ApplyDiscount(double amount, string tier)
+        {
+            tier = tier.ToUpper(); // Convert tier to uppercase
+            double discount = 0.10;
+
+            // Gold members get 20% discount
+            if (tier == "GOLD") {
+               discount = 0.20;
+            }
+            // Calculate discounted amount
+            double finalAmount = amount - (amount * discount);
+
+            // Return rounded result
+            return Math.Round(finalAmount, 2);
+
+        }
+        public static bool CheckBorrowingEligibility(string expiryDate)
+        {
+            // Convert string to DateTime
+            DateTime expiry = DateTime.Parse(expiryDate);
+            // Compare expiry date with today's date
+            if (expiry >= DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // Generate a unique member ID
+        // Generates a unique member ID
+        public static string GenerateMemberID()
+        {
+            // Take first 3 letters from member name
+            string namePart = memberName.Substring(0, 3).ToUpper();
+            // Apply mathematical operation on timestamp
+            double number = Math.Sqrt(DateTime.Now.Millisecond);
+            // Combine name and number
+            string memberID = namePart + ((int)number);
+
+            return memberID;
+        }
+        // Displays book details
+        public static void DisplayBookDetails (string title, string author,  string genre,int copies )
+        {
+            Console.WriteLine("Book Title : ".PadRight(20) + title);
+            Console.WriteLine("Book Author : ".PadRight(20) + author);
+            Console.WriteLine("Book Genre : ".PadRight(20) + genre);
+            Console.WriteLine("Available Copies : ".PadRight(20) + Convert.ToString(copies));
+        }
+        // Calculates renewal fee for standard members
+        public static double CalculateRenewalFee(int renewalDays)
+        {
+            double fee = renewalDays * 0.5;
+
+            // Round fee up to nearest whole number
+            return Math.Ceiling(fee);
+        }
+
+        // Calculates renewal fee for premium members
+        public static double CalculateRenewalFee(int renewalDays, bool isPremium)
+        {
+            double fee = renewalDays * 0.5;
+            // Premium members pay half the fee
+            if (isPremium)
+            {
+                fee = fee / 2;
+            }
+
+            // Round fee up to nearest whole number
+            return Math.Ceiling(fee);
+        }
+        // Validates and updates member email
+        public static bool UpdateMemberEmail(string newEmail, out string cleanedEmail)
+        {
+            // Remove extra spaces
+            cleanedEmail = newEmail.Trim();
+
+        }
+
+            return false;
+        }
+        // Displays session summary
+        public static void SessionSummary()
+        {
+            Console.WriteLine("========== Session Summary ==========");
+            Console.WriteLine("Member Name : " + memberName);
+            Console.WriteLine("Books Borrowed : "   + Convert.ToString(totalBooksBorrowedThisSession));
+            Console.WriteLine("Total Fines Paid : "  + Convert.ToString(Math.Round(totalFinesPaidThisSession, 2)));
+            Console.WriteLine("Current Date & Time : "   + DateTime.Now);
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -207,15 +314,34 @@ namespace LibraryManagementSystem
                         break;
                     case 5://5.Calculate Late Fine
                         Console.WriteLine("5.Calculate Late Fine  ");
-                        
+                        Console.Write("Enter overdue days : ");
+                        int overdueDays = int.Parse(Console.ReadLine());
+                        double fine = CalculateLateFine(overdueDays);
+                        Console.WriteLine("Late Fine : " + fine);
 
-                        
+
                         break;
                     case 6://6.Apply Member Discount
                         Console.WriteLine("6.Apply Member Discount ");
+                        Console.Write("Enter amount : ");
+                        double amount = double.Parse(Console.ReadLine());
+
+                        Console.Write("Enter member tier : ");
+                        string tier = Console.ReadLine();
+                        double finalAmount = ApplyDiscount(amount, tier);
+                        Console.WriteLine("Discounted Amount : " + finalAmount);
                         break;
                     case 7://7.Check Borrowing Eligibility 
                         Console.WriteLine("7.Check Borrowing Eligibility ");
+                        if (CheckBorrowingEligibility(membershipExpiryDate))
+                        {
+                            Console.WriteLine("Member is eligible to borrow.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Membership expired.");
+                        }
+
                         break;
                     case 8://8.Register Book
                         Console.WriteLine("///////////////////////////////////");
@@ -234,18 +360,45 @@ namespace LibraryManagementSystem
                         break;
                     case 9://9.Generate Member ID
                         Console.WriteLine("9.Generate Member ID ");
+                        Console.WriteLine("Generated Member ID : " + GenerateMemberID());
                         break;
                     case 10://10.Display Book Details
                         Console.WriteLine("10.Display Book Details  ");
+                            DisplayBookDetails( title: bookTitle,author: bookAuthor,genre: bookGenre,copies: availableCopies);
                         break;
                     case 11://11.Calculate Renewal Fee
                         Console.WriteLine("11.Calculate Renewal Fee  ");
+                        Console.Write("Enter renewal days : ");
+                        int renewalDays = int.Parse(Console.ReadLine());
+                        Console.Write("Is Premium Member? (true/false) : ");
+                        bool isPremium = bool.Parse(Console.ReadLine());
+                        double fee = CalculateRenewalFee(renewalDays, isPremium);
+
+                        Console.WriteLine("Renewal Fee : " + fee);
+
                         break;
                     case 12://12.Update Member Email
                         Console.WriteLine("12.Update Member Email  ");
+                        Console.Write("Enter New Email : ");
+
+                        string newEmail = Console.ReadLine();
+
+                        string cleanedEmail;
+
+                        if (UpdateMemberEmail(newEmail, out cleanedEmail))
+                        {
+                            memberEmail = cleanedEmail;
+
+                            Console.WriteLine("Email Updated Successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Email.");
+                        }
                         break;
                     case 13://13.Session Summary
                         Console.WriteLine("13.Session Summary   ");
+                        SessionSummary();
                         break;
                     case 14://14.Exit
                         Console.WriteLine("14.Exit  ");
