@@ -160,8 +160,6 @@ namespace LibraryManagementSystem
             }
             return false;
         }
-
-        // Generate a unique member ID
         // Generates a unique member ID
         public static string GenerateMemberID()
         {
@@ -215,7 +213,9 @@ namespace LibraryManagementSystem
         // Displays session summary
         public static void SessionSummary()
         {
+            Console.WriteLine("/////////////////////////////////////");
             Console.WriteLine("========== Session Summary ==========");
+            Console.WriteLine("/////////////////////////////////////");
             Console.WriteLine("Member Name : " + memberName);
             Console.WriteLine("Books Borrowed : "   + Convert.ToString(totalBooksBorrowedThisSession));
             Console.WriteLine("Total Fines Paid : "  + Convert.ToString(Math.Round(totalFinesPaidThisSession, 2)));
@@ -357,7 +357,9 @@ namespace LibraryManagementSystem
                         RegisterBook(title,author, copies);
                         break;
                     case 9://9.Generate Member ID
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("9.Generate Member ID ");
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("Generated Member ID : " + GenerateMemberID());
                         break;
                     case 10://10.Display Book Details
@@ -365,7 +367,9 @@ namespace LibraryManagementSystem
                             DisplayBookDetails( title: bookTitle,author: bookAuthor,genre: bookGenre,copies: availableCopies);
                         break;
                     case 11://11.Calculate Renewal Fee
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("11.Calculate Renewal Fee  ");
+                        Console.WriteLine("///////////////////////////////////");
                         Console.Write("Enter renewal days : ");
                         int renewalDays = int.Parse(Console.ReadLine());
                         Console.Write("Is Premium Member? (true/false) : ");
@@ -376,7 +380,9 @@ namespace LibraryManagementSystem
 
                         break;
                     case 12://12.Update Member Email
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("12.Update Member Email  ");
+                        Console.WriteLine("///////////////////////////////////");
                         Console.Write("Enter New Email : ");
 
                         string newEmail = Console.ReadLine();
@@ -395,6 +401,7 @@ namespace LibraryManagementSystem
                         }
                         break;
                     case 13://13.Session Summary
+                        Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("13.Session Summary   ");
                         SessionSummary();
                         break;
