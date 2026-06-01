@@ -78,13 +78,13 @@ namespace LibraryManagementSystem
         public static bool SearchBookByTitle(string keyword)
         {
 
-            Console.WriteLine(bookTitle.Substring(0, bookTitle.Length));
-            if (bookTitle.ToLower().Contains(keyword.ToLower()))
+            Console.WriteLine(bookTitle.Substring(0, bookTitle.Length));// Start from index 0 and take all characters in the title
+            if (bookTitle.ToLower().Contains(keyword.ToLower()))// Convert both strings to lowercase for case-insensitive search
             {
-                return true;
+                return true; // Keyword found in book title
             }
 
-            return false;
+            return false;// Keyword not found
         }
         public static void RegisterBook(string title,string author,int copies,string genre = "General")
         {
