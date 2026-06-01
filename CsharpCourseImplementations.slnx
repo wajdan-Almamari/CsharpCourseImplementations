@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="ArraysPracticeTaskSheet/ArraysPracticeTaskSheet.csproj" Id="d945ba19-a073-483f-a9e9-209cbbda0106" />
   <Project Path="BuiltinFunctions/BuiltinFunctions.csproj" Id="b24af2b7-122c-4273-9c1b-4e4e078ff5a2" />
   <Project Path="ClinicManagementSystem(CMS)/ClinicManagementSystem(CMS).csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
