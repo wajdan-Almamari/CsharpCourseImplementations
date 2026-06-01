@@ -69,8 +69,8 @@ namespace LibraryManagementSystem
         }
         public static void DisplayMemberProfile()
         {
-            Console.WriteLine("Member Name : " + memberName.PadLeft(20));
-            Console.WriteLine("Member ID : "  + Convert.ToString(memberID).PadLeft(20));
+            Console.WriteLine("Member Name : " + memberName.PadLeft(20)); // PadLeft adds spaces on the left until the text length becomes 20
+            Console.WriteLine("Member ID : "  + Convert.ToString(memberID).PadLeft(20));// Convert member ID to string and align it using PadLeft
             Console.WriteLine("Member Email : " + memberEmail.PadLeft(20));
             Console.WriteLine("Expiry Date : " + membershipExpiryDate.PadLeft(20));
             Console.WriteLine("Member Tier : " + memberTier.PadLeft(20));
