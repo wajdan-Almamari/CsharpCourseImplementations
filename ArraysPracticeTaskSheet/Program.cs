@@ -49,6 +49,28 @@
                 Console.WriteLine(score);
             }
         }
+        //Problem 3: Product Price Finder
+        public static void ProductPriceFinder()
+        {
+            double[] prices = { 4.99, 8.50, 12.75, 15.99, 20.00 }; // Array storing 5 product prices
+            Console.WriteLine("Product Prices:");
+            for (int i = 0; i < prices.Length; i++)  // display each price with its product number
+            {
+                Console.WriteLine("Product " + (i + 1) + ": " + prices[i]);
+            }
+            double targetPrice = 12.75; // Hardcoded target price to search for
+            int index = Array.IndexOf(prices, targetPrice);//Search for the target price and return its index
+            if (index != -1)
+            {
+                Console.WriteLine("Price found at index: " + index);
+            }
+            else
+            {
+                Console.WriteLine("Price not found.");
+            }
+            Console.WriteLine("Target Price: " + targetPrice);
+        }
+        
         static void Main(string[] args)
         {
             bool exit = false;
@@ -69,6 +91,7 @@
                         StudentScoreBoard();
                         break;
                     case 3://Problem 3: Product Price Finder
+                        ProductPriceFinder(); 
                         break;
                     case 4://Problem 4: Race Finish Times
                         break;
