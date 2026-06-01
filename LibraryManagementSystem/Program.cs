@@ -384,7 +384,6 @@ namespace LibraryManagementSystem
                         Console.WriteLine("12.Update Member Email  ");
                         Console.WriteLine("///////////////////////////////////");
                         Console.Write("Enter New Email : ");
-
                         string newEmail = Console.ReadLine();
 
                         string cleanedEmail;
