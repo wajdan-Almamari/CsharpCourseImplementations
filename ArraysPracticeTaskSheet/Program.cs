@@ -23,6 +23,7 @@
 
         }
 
+        //Problem 1: Temperature Log
         public static double TemperatureLog() {
             double[] temperatures = { 34.5, 35.2, 33.8, 36.1, 34.9, 35.7, 33.5 };
             for (int i = 0; i < temperatures.Length; i++)
@@ -30,6 +31,23 @@
                 Console.WriteLine("Day " + (i + 1) + ": " + temperatures[i] + " C");
             }
             return temperatures.Length;
+        }
+
+        //Problem 2: Student Score Board
+        public static void StudentScoreBoard()
+        {
+            int[] scores = { 85, 92, 78, 65, 99, 88 };
+            foreach (int score in scores)
+            {
+                Console.WriteLine(score);
+            }
+            Array.Reverse(scores);
+            Console.WriteLine("Reversed Order:");
+
+            foreach (int score in scores)
+            {
+                Console.WriteLine(score);
+            }
         }
         static void Main(string[] args)
         {
@@ -48,6 +66,7 @@
                         Console.WriteLine("Total Readings: " + total);
                         break;
                     case 2://Problem 2: Student Score Board
+                        StudentScoreBoard();
                         break;
                     case 3://Problem 3: Product Price Finder
                         break;
