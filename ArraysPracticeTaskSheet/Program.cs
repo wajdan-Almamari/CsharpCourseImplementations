@@ -72,7 +72,28 @@
             }
             Console.WriteLine("Target Price: " + targetPrice);
         }
-        
+        //Problem 4: Race Finish Times 
+        public static void RaceFinishTimes()
+        {
+            // Store finish times for 8 runners
+            int[] finishTimes = { 35, 55, 83, 32, 85, 61, 93, 22 };
+            Console.WriteLine("Original Finish Times:");
+            // Display original finish times using foreach
+            foreach (int time in finishTimes)
+            {
+                Console.WriteLine(time);
+            }
+            // Sort finish times in ascending order
+            Array.Sort(finishTimes);
+            Console.WriteLine("Sorted Finish Times: ");
+            // Display sorted finish times
+            foreach (int time in finishTimes)
+            {
+                Console.WriteLine(time);
+            }
+            Console.WriteLine("Total of participants : " + finishTimes.Length);
+        }
+
 
         static void Main(string[] args)
         {
@@ -96,7 +117,7 @@
                         ProductPriceFinder(); 
                         break;
                     case 4://Problem 4: Race Finish Times
-
+                        RaceFinishTimes();
                         break;
                     case 5://Problem 5: Classroom Grade Report
                         break;
