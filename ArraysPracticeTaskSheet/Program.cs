@@ -142,7 +142,54 @@ namespace ArraysPracticeTaskSheet
                 Console.WriteLine("Target quantity found at index: " + index);
             }
         }
-            static void Main(string[] args)
+        //Problem 7: Library Book Shelf Scanner  
+        public static void LibraryBookShelfScanner()
+        {
+            // Store available copies for 9 book titles
+            int[] copies = { 5, 0, 8, 3, 12, 6, 1, 9, 4 };
+
+            Console.WriteLine("Original Copy Counts:");
+
+            // Display original copy counts
+            foreach (int copy in copies)
+            {
+                Console.WriteLine(copy);
+            }
+
+            // Sort copy counts in ascending order
+            Array.Sort(copies);
+            Console.WriteLine("\nSorted Copy Counts:");
+
+            foreach (int copy in copies)
+            {
+                Console.WriteLine(copy);
+            }
+
+            // Display the highest copy count (last element)
+            Console.WriteLine("\nMost Copies: " + copies[copies.Length - 1]);
+
+            // Check if any title has zero copies
+            bool foundZero = false;
+
+            for (int i = 0; i < copies.Length; i++)
+            {
+                if (copies[i] == 0)
+                {
+                    foundZero = true;
+                    break;
+                }
+            }
+
+            if (foundZero)
+            {
+                Console.WriteLine("At least one title has zero copies.");
+            }
+            else
+            {
+                Console.WriteLine("No title has zero copies.");
+            }
+        }
+        static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -173,6 +220,7 @@ namespace ArraysPracticeTaskSheet
                         WarehouseInventoryCheck();
                         break;
                     case 7://Problem 7: Library Book Shelf Scanner
+                        LibraryBookShelfScanner();
                         break;
                     case 8://Problem 8: Sales Performance Analyzer
                         break;
