@@ -156,7 +156,9 @@
         public static void LibraryBookShelfScanner()
         {
             // Store available copies for 9 book titles
-            int[] copies = { 5, 0, 8, 3, 12, 6, 1, 9, 4 };
+            List<int> copies = new List<int>();
+            copies.AddRange(new int[] { 1,2,3,4,5,6,7,8 });
+            //int[] copies = { 5, 0, 8, 3, 12, 6, 1, 9, 4 };
 
             Console.WriteLine("Original Copy Counts:");
 
@@ -167,7 +169,7 @@
             }
 
             // Sort copy counts in ascending order
-            Array.Sort(copies);
+            copies.Sort();
             Console.WriteLine("\nSorted Copy Counts:");
 
             foreach (int copy in copies)
@@ -176,12 +178,12 @@
             }
 
             // Display the highest copy count (last element)
-            Console.WriteLine("\nMost Copies: " + copies[copies.Length - 1]);
+            Console.WriteLine("\nMost Copies: " + copies[copies.Count - 1]);
 
             // Check if any title has zero copies
             bool foundZero = false;
 
-            for (int i = 0; i < copies.Length; i++)
+            for (int i = 0; i < copies.Count; i++)
             {
                 if (copies[i] == 0)
                 {
