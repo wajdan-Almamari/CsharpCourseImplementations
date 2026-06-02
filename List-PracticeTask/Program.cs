@@ -128,19 +128,21 @@
         //Problem 6: Warehouse Inventory Check
         public static void WarehouseInventoryCheck()
         {
-            int[] quantities = { 1, 2, 3, 4, 5, 6, 7, 8 };
+            List<int> quantities = new List<int>();
+            quantities.AddRange(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 });
+            //int[] quantities = { 1, 2, 3, 4, 5, 6, 7, 8 };
             int totalStock = 0;
-            for (int i = 0; i < quantities.Length; i++)
+            for (int i = 0; i < quantities.Count; i++)
             {
                 totalStock += quantities[i];
 
             }
             Console.WriteLine("Total Stock: " + totalStock);
-            double averageStock = (double)totalStock / quantities.Length;
+            double averageStock = (double)totalStock / quantities.Count;
             Console.WriteLine("Average Stock: " + averageStock);
 
             int targetQuantity = 5;
-            int index = Array.IndexOf(quantities, targetQuantity);
+            int index = quantities.IndexOf(targetQuantity);
             if (index == -1)
             {
                 Console.WriteLine("Target quantity not found.");
