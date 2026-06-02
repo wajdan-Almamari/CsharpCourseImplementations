@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Numerics;
 
 namespace ArraysPracticeTaskSheet
 {
@@ -7,7 +8,7 @@ namespace ArraysPracticeTaskSheet
         public static void PrintMenuStyle()
         { //PrintMenu-style functions 
             Console.WriteLine("///////////////////////////////////");
-            Console.WriteLine(" task sheet contains 10 problems on C# Arrays ");
+            Console.WriteLine(" Arrays Practice Task Sheet ");
             Console.WriteLine("///////////////////////////////////");
             Console.WriteLine("Problem 1: Temperature Log ");
             Console.WriteLine("Problem 2: Student Score Board ");
@@ -116,14 +117,38 @@ namespace ArraysPracticeTaskSheet
                 Console.WriteLine("Rank " + (rank + 1) +": " + grades[rank]);
             }
         }
+        //Problem 6: Warehouse Inventory Check
+        public static void WarehouseInventoryCheck()
+        {
+            int[] quantities = { 1, 2, 3, 4, 5, 6, 7, 8 };
+            int totalStock = 0;
+            for (int i = 0; i < quantities.Length; i++)
+            {
+                totalStock += quantities[i];
 
-        static void Main(string[] args)
+            }
+            Console.WriteLine("Total Stock: " + totalStock);
+            double averageStock = (double)totalStock / quantities.Length;
+            Console.WriteLine("Average Stock: " + averageStock);
+
+            int targetQuantity = 5;
+            int index = Array.IndexOf(quantities, targetQuantity);
+            if (index == -1)
+            {
+                Console.WriteLine("Target quantity not found.");
+            }
+            else
+            {
+                Console.WriteLine("Target quantity found at index: " + index);
+            }
+        }
+            static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
             {
                 PrintMenuStyle();
-                int EnterChoise = int.Parse(Console.ReadLine());
+                int EnterChoise = Convert.ToInt32(Console.ReadLine());
                 switch (EnterChoise)
                 {
                     case 1://Problem 1: Temperature Log
@@ -145,6 +170,7 @@ namespace ArraysPracticeTaskSheet
                         ClassroomGradeReport();
                         break;
                     case 6://Problem 6: Warehouse Inventory Check
+                        WarehouseInventoryCheck();
                         break;
                     case 7://Problem 7: Library Book Shelf Scanner
                         break;
