@@ -189,6 +189,51 @@ namespace ArraysPracticeTaskSheet
                 Console.WriteLine("No title has zero copies.");
             }
         }
+        //Problem 8: Sales Performance Analyzer 
+        public static void SalesPerformanceAnalyzer()
+        {
+            // Store monthly revenue for 12 months
+            double[] revenue = { 1200.50, 950.75, 1800.00, 1350.25, 1600.80, 1100.40,2000.90, 1750.30, 1450.60, 1900.20, 1250.10, 2100.45 };
+            // Create second array to store sorted values
+            double[] sortedCopy = new double[revenue.Length];
+
+            Console.WriteLine("Original Monthly Revenue:");
+            // Display original revenue with month labels
+            for (int i = 0; i < revenue.Length; i++)
+            {
+                Console.WriteLine("Month " + (i + 1) + ": " + revenue[i] + " OMR");
+            }
+            // Copy revenue into sortedCopy manually using for loop
+            for (int i = 0; i < revenue.Length; i++)
+            {
+                sortedCopy[i] = revenue[i];
+            }
+            // Sort the copied array
+            Array.Sort(sortedCopy);
+
+            Console.WriteLine("\nSorted Revenue Trend:");
+            // Display sorted revenue values
+            for (int i = 0; i < sortedCopy.Length; i++)
+            {
+                Console.WriteLine(sortedCopy[i] + " OMR");
+            }
+            // Best revenue is the last value after sorting
+            Console.WriteLine("\nBest Month Revenue: " + sortedCopy[sortedCopy.Length - 1] + " OMR");
+            // Worst revenue is the first value after sorting
+            Console.WriteLine("Worst Month Revenue: " + sortedCopy[0] + " OMR");
+            // Calculate total revenue
+            double totalRevenue = 0;
+
+            for (int i = 0; i < revenue.Length; i++)
+            {
+                totalRevenue += revenue[i];
+            }
+            // Calculate average revenue using .Length
+            double averageRevenue = totalRevenue / revenue.Length;
+
+            Console.WriteLine("Average Monthly Revenue: " + averageRevenue + " OMR");
+        }
+       
         static void Main(string[] args)
         {
             bool exit = false;
@@ -223,6 +268,7 @@ namespace ArraysPracticeTaskSheet
                         LibraryBookShelfScanner();
                         break;
                     case 8://Problem 8: Sales Performance Analyzer
+                        SalesPerformanceAnalyzer();
                         break;
                     case 9://Problem 9: Flight Seat Allocation Display
                         break;
