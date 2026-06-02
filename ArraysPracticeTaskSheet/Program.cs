@@ -24,13 +24,15 @@
         }
 
         //Problem 1: Temperature Log
-        public static double TemperatureLog() {
+        public static void TemperatureLog() {
             double[] temperatures = { 34.5, 35.2, 33.8, 36.1, 34.9, 35.7, 33.5 };
+            // Display each temperature with its day number
             for (int i = 0; i < temperatures.Length; i++)
             {
                 Console.WriteLine("Day " + (i + 1) + ": " + temperatures[i] + " C");
             }
-            return temperatures.Length;
+            // Display total number of readings
+            Console.WriteLine("Total Readings: " + temperatures.Length);
         }
 
         //Problem 2: Student Score Board
@@ -71,6 +73,7 @@
             Console.WriteLine("Target Price: " + targetPrice);
         }
         
+
         static void Main(string[] args)
         {
             bool exit = false;
@@ -84,8 +87,7 @@
                         Console.WriteLine("///////////////////////////////////");
                         Console.WriteLine("Problem 1: Temperature Log ");
                         Console.WriteLine("///////////////////////////////////");
-                        double total = TemperatureLog();
-                        Console.WriteLine("Total Readings: " + total);
+                        TemperatureLog();
                         break;
                     case 2://Problem 2: Student Score Board
                         StudentScoreBoard();
@@ -94,6 +96,7 @@
                         ProductPriceFinder(); 
                         break;
                     case 4://Problem 4: Race Finish Times
+
                         break;
                     case 5://Problem 5: Classroom Grade Report
                         break;
