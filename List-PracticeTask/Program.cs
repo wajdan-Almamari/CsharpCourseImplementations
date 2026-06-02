@@ -205,18 +205,20 @@
         public static void SalesPerformanceAnalyzer()
         {
             // Store monthly revenue for 12 months
-            double[] revenue = { 1200.50, 950.75, 1800.00, 1350.25, 1600.80, 1100.40, 2000.90, 1750.30, 1450.60, 1900.20, 1250.10, 2100.45 };
+            List<double> revenue = new List<double>();
+            revenue.AddRange(new double[] { 1200.50, 950.75, 1800.00, 1350.25, 1600.80, 1100.40, 2000.90, 1750.30, 1450.60, 1900.20, 1250.10, 2100.45 });
+            //double[] revenue = { 1200.50, 950.75, 1800.00, 1350.25, 1600.80, 1100.40, 2000.90, 1750.30, 1450.60, 1900.20, 1250.10, 2100.45 };
             // Create second array to store sorted values
-            double[] sortedCopy = new double[revenue.Length];
+            double[] sortedCopy = new double[revenue.Count];
 
             Console.WriteLine("Original Monthly Revenue:");
             // Display original revenue with month labels
-            for (int i = 0; i < revenue.Length; i++)
+            for (int i = 0; i < revenue.Count; i++)
             {
                 Console.WriteLine("Month " + (i + 1) + ": " + revenue[i] + " OMR");
             }
             // Copy revenue into sortedCopy manually using for loop
-            for (int i = 0; i < revenue.Length; i++)
+            for (int i = 0; i < revenue.Count; i++)
             {
                 sortedCopy[i] = revenue[i];
             }
@@ -236,12 +238,12 @@
             // Calculate total revenue
             double totalRevenue = 0;
 
-            for (int i = 0; i < revenue.Length; i++)
+            for (int i = 0; i < revenue.Count; i++)
             {
                 totalRevenue += revenue[i];
             }
             // Calculate average revenue using .Length
-            double averageRevenue = totalRevenue / revenue.Length;
+            double averageRevenue = totalRevenue / revenue.Count;
 
             Console.WriteLine("Average Monthly Revenue: " + averageRevenue + " OMR");
         }
