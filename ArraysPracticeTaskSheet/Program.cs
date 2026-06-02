@@ -1,4 +1,6 @@
-﻿namespace ArraysPracticeTaskSheet
+﻿using System.Diagnostics;
+
+namespace ArraysPracticeTaskSheet
 {
     internal class Program
     {
@@ -93,7 +95,27 @@
             }
             Console.WriteLine("Total of participants : " + finishTimes.Length);
         }
-
+        //Problem 5: Classroom Grade Report 
+        public static void ClassroomGradeReport()
+        {
+            int[] grades = { 50, 66, 88, 90, 99, 70, 55, 87, 95, 30 };
+            //Sort the grades in ascending order. 
+            Array.Sort(grades);
+            Console.WriteLine("Grades in  Ascending order : ");
+            for (int i = 0; i < grades.Length; i++)
+            {
+                Console.WriteLine(grades[i]);
+            }
+            // Reverse grades to descending order
+            Array.Reverse(grades);
+            Console.WriteLine("\nGrades in Descending order : ");
+           
+            //Print each grade with a rank label (Rank 1, Rank 2, ...) using a for loop.
+            for (int rank= 0; rank <  grades.Length; rank++)
+            {
+                Console.WriteLine("Rank " + (rank + 1) +": " + grades[rank]);
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -120,6 +142,7 @@
                         RaceFinishTimes();
                         break;
                     case 5://Problem 5: Classroom Grade Report
+                        ClassroomGradeReport();
                         break;
                     case 6://Problem 6: Warehouse Inventory Check
                         break;
