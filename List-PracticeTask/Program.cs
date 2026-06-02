@@ -105,20 +105,22 @@
         //Problem 5: Classroom Grade Report 
         public static void ClassroomGradeReport()
         {
-            int[] grades = { 50, 66, 88, 90, 99, 70, 55, 87, 95, 30 };
+            List<int> grades = new List<int>();
+            grades.AddRange(new int[] { 50, 66, 88, 90, 99, 70, 55, 87, 95, 30 });
+            //int[] grades = { 50, 66, 88, 90, 99, 70, 55, 87, 95, 30 };
             //Sort the grades in ascending order. 
-            Array.Sort(grades);
+            grades.Sort();
             Console.WriteLine("Grades in  Ascending order : ");
-            for (int i = 0; i < grades.Length; i++)
+            for (int i = 0; i < grades.Count; i++)
             {
                 Console.WriteLine(grades[i]);
             }
             // Reverse grades to descending order
-            Array.Reverse(grades);
+            grades.Reverse();
             Console.WriteLine("\nGrades in Descending order : ");
 
             //Print each grade with a rank label (Rank 1, Rank 2, ...) using a for loop.
-            for (int rank = 0; rank < grades.Length; rank++)
+            for (int rank = 0; rank < grades.Count; rank++)
             {
                 Console.WriteLine("Rank " + (rank + 1) + ": " + grades[rank]);
             }
