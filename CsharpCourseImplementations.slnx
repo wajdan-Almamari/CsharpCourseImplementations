@@ -2,6 +2,7 @@
   <Project Path="ArraysPracticeTaskSheet/ArraysPracticeTaskSheet.csproj" Id="d945ba19-a073-483f-a9e9-209cbbda0106" />
   <Project Path="ClinicManagementSystem(CMS)/ClinicManagementSystem(CMS).csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
+  <Project Path="HotelManagement-ListTasks/HotelManagement-ListTasks.csproj" Id="4c703cc8-282b-4b79-a331-4120bee3a7a5" />
   <Project Path="HotelManagementSystem/HotelManagementSystem.csproj" Id="ad861b22-57d5-4e74-b04c-40ca30e1b9e1" />
   <Project Path="LibraryManagementSystem/LibraryManagementSystem.csproj" Id="435ddc6b-6f5a-445d-9eab-1ceabee59d77" />
   <Project Path="List-PracticeTask/List-PracticeTask.csproj" Id="34567927-d19b-49f1-a06e-5cca88d49849" />
