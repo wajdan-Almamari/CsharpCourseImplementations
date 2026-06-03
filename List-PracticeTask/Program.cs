@@ -247,6 +247,68 @@
 
             Console.WriteLine("Average Monthly Revenue: " + averageRevenue + " OMR");
         }
+        // Problem 9: Flight Seat Allocation Display
+        public static void FlightSeatAllocationDisplay()
+        {
+            // Store 15 unique seat numbers
+            //int[] seats = { 12, 5, 33, 18, 7, 25, 41, 3, 29, 14, 36, 9, 47, 21, 30 };
+            List<int> seats = new List<int>();
+            seats.AddRange(new int[]{ 12, 5, 33, 18, 7, 25, 41, 3, 29, 14, 36, 9, 47, 21, 30 });
+            // Create a second array to hold reversed values
+            int[] reverse = new int[seats.Count];
+
+            Console.WriteLine("Original Assignment Order:");
+
+            // Display original seat assignment order
+            foreach (int seat in seats)
+            {
+                Console.WriteLine(seat);
+            }
+
+            // Sort seats in ascending order
+            seats.Sort();
+
+            Console.WriteLine("\nBoarding Order:");
+
+            // Display sorted boarding order
+            foreach (int seat in seats)
+            {
+                Console.WriteLine(seat);
+            }
+
+            // Search for a target seat number in the sorted array
+            int targetSeat = 29;
+
+            int index = seats.IndexOf( targetSeat);
+
+            if (index == -1)
+            {
+                Console.WriteLine("\nTarget seat not found.");
+            }
+            else
+            {
+                Console.WriteLine("\nTarget seat found at sorted index: " + index);
+            }
+
+            // Copy sorted seats into reverse array
+            for (int i = 0; i < seats.Count; i++)
+            {
+                reverse[i] = seats[i];
+            }
+
+            // Reverse the copied array only
+            Array.Reverse(reverse);
+            Console.WriteLine("\nSorted and Reversed Seats:");
+
+            // Display sorted and reversed arrays side-by-side
+            for (int i = 0; i < seats.Count; i++)
+            {
+                Console.WriteLine("Index " + i + " - Sorted: " + seats[i] + "   Reversed: " + reverse[i]);
+            }
+
+            // Display total seat count
+            Console.WriteLine("\nTotal Seat Count: " + seats.Count);
+        }
 
         static void Main(string[] args)
         {
@@ -285,6 +347,7 @@
                         SalesPerformanceAnalyzer();
                         break;
                     case 9://Problem 9: Flight Seat Allocation Display
+                        FlightSeatAllocationDisplay();
                         break;
                     case 10://Problem 10: Hospital Patient Priority Queue 
                         break;
