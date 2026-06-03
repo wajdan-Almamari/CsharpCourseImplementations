@@ -19,6 +19,7 @@ namespace HotelManagement_ListTasks
 
             Console.Write("Enter your choise : ");
         }
+        //Problem 1: Room Service Menu
         public static void RoomServiceMenu()
         {
             // Create a list to store menu items
@@ -55,7 +56,28 @@ namespace HotelManagement_ListTasks
                 Console.WriteLine("Burger is not available.");
             }
         }
-            static void Main(string[] args)
+        //Problem 2: Guest Check-In Queue
+        public static void GuestCheckInQueue()
+        {
+            List<string> checkInQueue = new List<string>();
+            checkInQueue.Add("Wajdan");
+            checkInQueue.Add("Ahmed");
+            checkInQueue.Add("Sara");
+            checkInQueue.Add("Ali");
+            checkInQueue.Add("Mai");
+            for (int i = 0; i < checkInQueue.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + checkInQueue[i]);
+            }
+            //// Remove second guest
+            checkInQueue.Remove("Ahmed");
+            checkInQueue.Remove("Ali");
+            for (int i = 0; i < checkInQueue.Count; i++)
+            {
+                Console.WriteLine("\n"+(i + 1) + ". " + checkInQueue[i]);
+            }
+        }
+        static void Main(string[] args)
             {
                 bool exit = false;
                 while (exit == false)
@@ -68,6 +90,7 @@ namespace HotelManagement_ListTasks
                             RoomServiceMenu();
                             break;
                         case 2://Problem 2: Guest Check-In Queue    
+                            GuestCheckInQueue();
                             break;
                         case 3://Problem 3: Housekeeping Floor Assignment
                             break;
