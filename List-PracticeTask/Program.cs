@@ -1,4 +1,6 @@
-﻿namespace List_PracticeTask
+﻿using System;
+using System.Collections.Generic;
+namespace List_PracticeTask
 {
     internal class Program
     {
@@ -309,8 +311,9 @@
             // Display total seat count
             Console.WriteLine("\nTotal Seat Count: " + seats.Count);
         }
+        
 
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)

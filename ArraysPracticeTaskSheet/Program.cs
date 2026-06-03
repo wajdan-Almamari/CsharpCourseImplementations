@@ -294,6 +294,70 @@ namespace ArraysPracticeTaskSheet
             // Display total seat count
             Console.WriteLine("\nTotal Seat Count: " + seats.Length);
         }
+        // Problem 10: Hospital Patient Priority Queue
+        public static void HospitalPatientPriorityQueue()
+        {
+            // Store severity scores for 20 patients
+            int[] severity = { 2, 5, 1, 8, 3, 10, 4, 6, 2, 7, 9, 1, 3, 5, 6, 4, 8, 10, 2, 7 };
+
+            // Create a copy array to perform sorting operations
+            int[] sortedSeverity = new int[severity.Length];
+
+            // Copy values from severity to sortedSeverity
+            for (int i = 0; i < severity.Length; i++)
+            {
+                sortedSeverity[i] = severity[i];
+            }
+
+            // Sort the copied array in ascending order
+            Array.Sort(sortedSeverity);
+
+            // Calculate median before reversing
+            // Median = average of the two middle elements
+            double median = (sortedSeverity[sortedSeverity.Length / 2 - 1] + sortedSeverity[sortedSeverity.Length / 2]) / 2.0;
+
+            // Reverse the sorted array to display highest values first
+            Array.Reverse(sortedSeverity);
+
+            Console.WriteLine("Triage Priority List:");
+
+            // Display patients ranked by severity
+            for (int rank = 0; rank < sortedSeverity.Length; rank++)
+            {
+                Console.WriteLine("Rank " + (rank + 1) +  ": Severity " + sortedSeverity[rank]);
+            }
+
+            // Count critical cases (severity score <= 3)
+            int criticalCount = 0;
+
+            for (int i = 0; i < severity.Length; i++)
+            {
+                if (severity[i] <= 3)
+                {
+                    criticalCount++;
+                }
+            }
+
+            // Display median severity score
+            Console.WriteLine("\nMedian Severity Score: " + median);
+
+            // Display total critical cases
+            Console.WriteLine("Critical Cases Count: " + criticalCount);
+
+            // Search for a specific severity score
+            int targetSeverity = 3;
+            int index = Array.IndexOf(sortedSeverity, targetSeverity);
+
+            // Check whether the target severity exists
+            if (index == -1)
+            {
+                Console.WriteLine("Target severity not found.");
+            }
+            else
+            {
+                Console.WriteLine("Target severity found at sorted index: " + index);
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -335,6 +399,7 @@ namespace ArraysPracticeTaskSheet
                         FlightSeatAllocationDisplay();
                         break;
                     case 10://Problem 10: Hospital Patient Priority Queue 
+                        HospitalPatientPriorityQueue();
                         break;
                     case 11://11.Exit
                         exit = true;
