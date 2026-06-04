@@ -176,8 +176,81 @@ namespace Stack_QueuePracticeTaskSheet
             Console.WriteLine("Final Count:");
             Console.WriteLine(undoStack.Count);
         }
+        public static void HospitalEmergencyRoomTriage()
+        {
+            Queue<string> triageQueue = new Queue<string>();
+            Queue<string> tempQueue = new Queue<string>();
+            // Add 8 patients to the queue
+            triageQueue.Enqueue("Ahmed");
+            triageQueue.Enqueue("Sara");
+            triageQueue.Enqueue("Ali");
+            triageQueue.Enqueue("Mai");
+            triageQueue.Enqueue("Khalid");
+            triageQueue.Enqueue("Noor");
+            triageQueue.Enqueue("Omar");
+            triageQueue.Enqueue("Huda");
+            
+            // Display the full queue with position labels
+            Console.WriteLine("=== Full Triage Queue ===");
+            int position = 1;
+            foreach (string patient in triageQueue)
+            {
+                Console.WriteLine(position + ". " + patient);
+                position++;
+            }
+            // Show the next patient without removing
+            Console.WriteLine("\nNext Patient:");
+            Console.WriteLine(triageQueue.Peek());
 
-        
+            // Process (dequeue) the first 3 patients and display each name as they are seen.
+            // Process the first 3 patients
+            Console.WriteLine("\n=== Processed Patients ===");
+            Console.WriteLine("Seen: " + triageQueue.Dequeue());
+            Console.WriteLine("Seen: " + triageQueue.Dequeue());
+            Console.WriteLine("Seen: " + triageQueue.Dequeue());
+            // Display remaining queue
+            Console.WriteLine("\n=== Remaining Queue ===");
+            position = 1;
+            foreach (string patient in triageQueue)
+            {
+                Console.WriteLine(position + ". " + patient);
+                position++;
+            }
+            // Remove a patient from the middle of the queue
+            string targetPatient = "Noor";
+
+            // Dequeue all patients, skip the target patient, and store the rest in tempQueue
+            while (triageQueue.Count > 0)
+            {
+                string patient = triageQueue.Dequeue();
+
+                // Keep all patients except the one who left
+                if (patient != targetPatient)
+                {
+                    tempQueue.Enqueue(patient);
+                }
+            }
+
+            // Move patients back to the original queue in the same order
+            while (tempQueue.Count > 0)
+            {
+                triageQueue.Enqueue(tempQueue.Dequeue());
+            }
+            // Display final queue
+            Console.WriteLine("\n=== Final Queue After Removal ===");
+            position = 1;
+            foreach (string patient in triageQueue)
+            {
+                Console.WriteLine(position + ". " + patient);
+                position++;
+            }
+
+            // Display final count
+            Console.WriteLine("\nFinal Count:");
+            Console.WriteLine(triageQueue.Count);
+        }
+
+
         static void Main(string[] args)
         {
             bool exit = false;
@@ -201,6 +274,7 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 4://Problem 4: Hospital Emergency Room Triage
+                        HospitalEmergencyRoomTriage();
                         break;
 
                     case 5://Problem 5: Parenthesis Validator
