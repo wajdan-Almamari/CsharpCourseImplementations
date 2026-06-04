@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Stack_QueuePracticeTaskSheet
 {
@@ -249,8 +250,135 @@ namespace Stack_QueuePracticeTaskSheet
             Console.WriteLine("\nFinal Count:");
             Console.WriteLine(triageQueue.Count);
         }
+        public static void ParenthesisValidator()
+        {
+            // Create a stack to store opening brackets
+            Stack<char> bracketStack = new Stack<char>();
 
+            // Requirement 1:Define 3 hardcoded test strings: one fully balanced, one unbalanced (mismatched type), one unbalanced (unclosed bracket).
+            // Define 3 hardcoded test strings
+            string test1 = "{[()]}";   // Balanced
+            string test2 = "{[(])}";   // Mismatched brackets
+            string test3 = "{[()]}(";  // Unclosed bracket
+            Console.WriteLine("=== Test Case 1 ===");
+            // Send test1 and the stack to the validation function
+            ValidateBrackets(test1, bracketStack);
+            // Requirement 7:
+            // Clear the stack before the next test
+            while (bracketStack.Count > 0)
+            {
+                bracketStack.Pop();
+            }
 
+            Console.WriteLine("\n=== Test Case 2 ===");
+            // Send test2 and the same stack to the validation function
+            ValidateBrackets(test2, bracketStack);
+
+            // Clear the stack before the next test
+            while (bracketStack.Count > 0)
+            {
+                bracketStack.Pop();
+            }
+
+            Console.WriteLine("\n=== Test Case 3 ===");
+
+            // Send test3 and the same stack to the validation function
+            ValidateBrackets(test3, bracketStack);
+        }
+        
+        // Function that checks whether brackets are balanced
+        public static void ValidateBrackets(string input, Stack<char> bracketStack)
+        {
+            // Assume the expression is valid
+            bool isValid = true;
+
+            // Requirement 2:
+            // Loop through each character in the string
+            for (int i = 0; i < input.Length; i++)
+            {
+                // Store the current character
+                char currentChar = input[i];
+
+                // Requirement 3:
+                // If the character is an opening bracket
+                if (currentChar == '(' || currentChar == '[' || currentChar == '{')
+                {
+                    // Push opening bracket onto the stack
+                    bracketStack.Push(currentChar);
+                }
+
+                // Requirement 4:
+                // If the character is a closing round bracket
+                else if (currentChar == ')')
+                {
+                    // Invalid if stack is empty
+                    // or top bracket is not '('
+                    if (bracketStack.Count == 0 || bracketStack.Peek() != '(')
+                    {
+                        isValid = false;
+                        break;
+                    }
+
+                    // Remove matching opening bracket
+                    bracketStack.Pop();
+                }
+
+                // If the character is a closing square bracket
+                else if (currentChar == ']')
+                {
+                    // Invalid if stack is empty
+                    // or top bracket is not '['
+                    if (bracketStack.Count == 0 || bracketStack.Peek() != '[')
+                    {
+                        isValid = false;
+                        break;
+                    }
+
+                    // Remove matching opening bracket
+                    bracketStack.Pop();
+                }
+
+                // If the character is a closing curly bracket
+                else if (currentChar == '}')
+                {
+                    // Invalid if stack is empty
+                    // or top bracket is not '{'
+                    if (bracketStack.Count == 0 || bracketStack.Peek() != '{')
+                    {
+                        isValid = false;
+                        break;
+                    }
+
+                    // Remove matching opening bracket
+                    bracketStack.Pop();
+                }
+            }
+
+            // Requirement 5:
+            // If the stack still contains brackets,
+            // then some opening brackets were never closed
+            if (bracketStack.Count > 0)
+            {
+                isValid = false;
+            }
+            // Requirement 6:
+            // Display the input string
+            Console.WriteLine("Input: " + input);
+
+            // Display the validation result
+            if (isValid)
+            {
+                Console.WriteLine("Result: Valid");
+            }
+            else
+            {
+                Console.WriteLine("Result: Invalid");
+            }
+        }
+        public static void ReverseaSentenceWordbyWord()
+        {
+
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -278,6 +406,7 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 5://Problem 5: Parenthesis Validator
+                        ParenthesisValidator();
                         break;
 
                     case 6://Problem 6: Print Spooler with Priority Re-Insertion
