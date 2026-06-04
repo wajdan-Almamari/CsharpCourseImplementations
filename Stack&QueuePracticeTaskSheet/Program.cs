@@ -63,6 +63,46 @@ namespace Stack_QueuePracticeTaskSheet
             Console.WriteLine(browserHistory.Count());
 
         }
+        public static void HotelCheckInQueue() 
+        { 
+            Queue <string> checkInQueue = new Queue<string>();
+            // Add 5 guests
+            checkInQueue.Enqueue("Ahmed");
+            checkInQueue.Enqueue("Sara");
+            checkInQueue.Enqueue("Ali");
+            checkInQueue.Enqueue("Mai");
+            checkInQueue.Enqueue("Wajdan");
+            //Display all waiting guests in order using a foreach loop.
+            Console.WriteLine("\nWaiting Guests ");
+            foreach(string gust in checkInQueue)
+            {
+                Console.WriteLine(gust);
+            }
+            // Use Peek to display who is next without removing them from the queue.
+            Console.WriteLine("\nNext Guest:");
+            Console.WriteLine(checkInQueue.Peek());
+
+            // Serve the next 2 guests — dequeue twice and display each served guest's name.
+            Console.WriteLine("\nServed Guest 1:");
+            Console.WriteLine(checkInQueue.Dequeue());
+
+            Console.WriteLine("\nServed Guest 2:");
+            Console.WriteLine(checkInQueue.Dequeue());
+
+            //Display the remaining queue after serving.
+            Console.WriteLine("\n Remaining Queue:");
+            foreach (string guest in checkInQueue)
+            {
+                Console.WriteLine(guest);
+            }
+            // Check if guest still waiting
+            Console.Write("\nIs Ali still waiting?");
+            Console.WriteLine(checkInQueue.Contains("Ali"));
+
+            // Display count
+            Console.Write("\nGuests Remaining:");
+            Console.WriteLine(checkInQueue.Count);
+        }
 
         static void Main(string[] args)
         {
@@ -79,6 +119,7 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 2://Problem 2: Hotel Check-In Queue
+                        HotelCheckInQueue();
                         break;
 
                     case 3:// Problem 3 (Stack) + Problem 4 (Queue) 
