@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Stack_QueuePracticeTaskSheet
@@ -377,9 +378,91 @@ namespace Stack_QueuePracticeTaskSheet
         }
         public static void ReverseaSentenceWordbyWord()
         {
+            // Create a stack to store words
+            Stack<string> wordStack = new Stack<string>();
+            // Requirement 1:
+            // Define 2 hardcoded sentences
+            string sentence1 = "C# is fun to learn";
+            string sentence2 = "Stacks are easy to understand";
+            Console.WriteLine("=== Test Case 1 ===");
+            // Requirement 2:
+            //For each sentence: split the sentence into words using the Split method on the space character.
+            // Split sentence into words
+            string[] words = sentence1.Split(' ');
+            // Requirement 3:
+            // Push each word into the stack
+            foreach (string word in words)
+            {
+                wordStack.Push(word);
+            }
 
+            // Requirement 4:
+            // Display stack contents before reversal
+            Console.WriteLine("Stack Contents:");
+            foreach (string word in wordStack)
+            {
+                Console.WriteLine(word);
+            }
+            // Variable to store reversed sentence
+            string reversedWords = "";
+
+            // Requirement 5:
+            // Pop all words from the stack
+            while (wordStack.Count > 0)
+            {
+                reversedWords += wordStack.Pop() + " ";
+            }
+
+            // Requirement 6:
+            // Display original and reversed sentence
+            Console.WriteLine("Original: " + sentence1);
+            Console.WriteLine("Reversed: " + reversedWords);
+
+            // Requirement 7:
+            // Ensure stack is empty before next test
+            while (wordStack.Count > 0)
+            {
+                wordStack.Pop();
+            }
+        
         }
-        static void Main(string[] args)
+
+        public static void TicketCounterSimulation()
+        {
+            Queue<string> regularQueue =new Queue<string>();
+            Queue<string> vipQueue =new Queue<string>();
+            // Requirement 1:
+            // Add 3 VIP tickets
+            vipQueue.Enqueue("V001");
+            vipQueue.Enqueue("V002");
+            vipQueue.Enqueue("V003");
+            // Regular Tickets
+            regularQueue.Enqueue("R001");
+            regularQueue.Enqueue("R002");
+            regularQueue.Enqueue("R003");
+            regularQueue.Enqueue("R004");
+            regularQueue.Enqueue("R005");
+            
+            int totalTickets = 0;
+
+            while (vipQueue.Count > 0 || regularQueue.Count > 0)
+            {
+                if (vipQueue.Count > 0)
+                {
+                    Console.WriteLine("Serving VIP: " + vipQueue.Dequeue());
+                    totalTickets++;
+                }
+                if (regularQueue.Count > 0)
+                {
+                    Console.WriteLine("Serving Regular: " + regularQueue.Dequeue());
+                    totalTickets++;
+                }
+            }
+            Console.WriteLine("Total Tickets Processed: " + totalTickets);
+        }
+
+
+            static void Main(string[] args)
         {
             bool exit = false;
             while (exit == false)
@@ -413,12 +496,15 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 7://Problem 7: Reverse a Sentence Word by Word
+                        ReverseaSentenceWordbyWord();
                         break;
 
                     case 8://Problem 8: Multi-Level Undo with Redo
+                   
                         break;
 
                     case 9://Problem 9: Ticket Counter Simulation 
+                        TicketCounterSimulation();
                         break;
 
                     case 10://Problem 10: Order Processing Pipeline with Statistics
