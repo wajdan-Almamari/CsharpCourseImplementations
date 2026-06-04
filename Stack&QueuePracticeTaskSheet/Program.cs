@@ -103,7 +103,81 @@ namespace Stack_QueuePracticeTaskSheet
             Console.Write("\nGuests Remaining:");
             Console.WriteLine(checkInQueue.Count);
         }
+        public static void TextEditorUndoSystem()
+        {
+             Stack<string > undoStack= new Stack<string>();
+             Stack<string> tempStack = new Stack<string>();
+            // Push 7 hardcoded action descriptions onto undoStack.
+            undoStack.Push("Typed: Hello");
+            undoStack.Push("Typed: World");
+            undoStack.Push("Deleted: World");
+            undoStack.Push("Typed: C#");
+            undoStack.Push("Changed Font");
+            undoStack.Push("Inserted Image");
+            undoStack.Push("Saved File");
+            // Display the full undo history using foreach.
+            Console.WriteLine($"Full Undo History");
+            Console.WriteLine("=================");
+            foreach (string undo in undoStack)
+            {
+                Console.WriteLine(undo);
+            }
+            //Use Peek to show which action would be undone next.
+            Console.WriteLine("=================");
+            Console.WriteLine("Next Undo Action:");
+            Console.WriteLine(undoStack.Peek());
+            // Undo the last 2 actions — pop twice, displaying each removed action.
+            Console.WriteLine("=================");
+            Console.WriteLine("Undo Last 2 Actions:");
+            Console.WriteLine("Removed: " + undoStack.Pop());
+            Console.WriteLine("Removed: " + undoStack.Pop());
+            // Display the remaining undo history.
+            Console.WriteLine("=================");
+            Console.WriteLine(" Remaining Undo History");
+            foreach (string undo in undoStack)
+            {
+                Console.WriteLine(undo);
+            }
+            /*
+              Selective undo: remove one specific hardcoded action from the middle of the stack. 
+              Use tempStack to preserve the order of all other actions.
+              Display the stack before and after the selective undo
+             */
+            Console.WriteLine("=================");
+            Console.WriteLine("Before Selective Undo ");
+            foreach (string undo in undoStack)
+            {
+                Console.WriteLine(undo);
+            }
+            string targetAction = "Deleted: World";
+            // Remove target undo from middle
+        
+             while (undoStack.Count > 0)//Remove the target action while moving all other actions to the temporary stack
+            {
+                string action = undoStack.Pop();
+                // Keep all actions except the one we want to remove
+                if (action != targetAction)
+                {
+                    tempStack.Push(action);
+                }
+            }
+            // Restore the remaining actions back to the original stack
+            while (tempStack.Count > 0)
+            {
+                undoStack.Push(tempStack.Pop());
+            }
+            Console.WriteLine("=================");
+            Console.WriteLine("After Selective Undo ");
+            foreach (string undo in undoStack)
+            {
+                Console.WriteLine(undo);
+            }
+            Console.WriteLine("=================");
+            Console.WriteLine("Final Count:");
+            Console.WriteLine(undoStack.Count);
+        }
 
+        
         static void Main(string[] args)
         {
             bool exit = false;
@@ -123,6 +197,7 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 3:// Problem 3 (Stack) + Problem 4 (Queue) 
+                        TextEditorUndoSystem();
                         break;
 
                     case 4://Problem 4: Hospital Emergency Room Triage
