@@ -22,6 +22,48 @@ namespace Stack_QueuePracticeTaskSheet
             Console.WriteLine("0. Exit");
             Console.Write("Choose: ");
         }
+        public static void BrowserHistoryTracker() 
+        {
+            // Create empty stack
+            Stack<string> browserHistory = new Stack<string>();
+            // Push 5 URLs
+            browserHistory.Push("www.google.com");
+            browserHistory.Push("www.youtube.com");
+            browserHistory.Push("www.github.com");
+            browserHistory.Push("www.microsoft.com");
+            browserHistory.Push("www.openai.com");
+            // Display history
+            Console.WriteLine("=== Browser History ===");
+            foreach (string url in browserHistory)
+            {
+                Console.WriteLine(url);
+            }
+            // Current page
+            Console.Write("\nCurrent Page:  ");
+            Console.WriteLine(browserHistory.Peek());
+
+            // Back twice
+            Console.WriteLine("\nBack 1:");
+            Console.WriteLine(browserHistory.Pop());
+            Console.WriteLine("\nBack 2:");
+            Console.WriteLine(browserHistory.Pop());
+
+            //Display the remaining history after both pops
+            Console.WriteLine("\n=== Remaining History ===");
+            foreach (string url in browserHistory)
+            {
+                Console.WriteLine(url);
+            }
+            // Check whether a specific hardcoded URL is still in the history and print the result.
+            Console.Write("\nIs www.github.com still in history? ");
+            Console.WriteLine(browserHistory.Contains("www.github.com"));
+
+            //Display the total number of pages remaining in the history using Count.
+            Console.Write("\n Page remaining : ");
+            Console.WriteLine(browserHistory.Count());
+
+        }
+
         static void Main(string[] args)
         {
             bool exit = false;
@@ -32,37 +74,39 @@ namespace Stack_QueuePracticeTaskSheet
 
                 switch (choice)
                 {
-                    case 1:
+                    case 1://Problem 1: Browser History Tracker
+                        BrowserHistoryTracker();
                         break;
 
-                    case 2:
+                    case 2://Problem 2: Hotel Check-In Queue
                         break;
 
-                    case 3:
+                    case 3:// Problem 3 (Stack) + Problem 4 (Queue) 
                         break;
 
-                    case 4:
+                    case 4://Problem 4: Hospital Emergency Room Triage
                         break;
 
-                    case 5:
+                    case 5://Problem 5: Parenthesis Validator
                         break;
 
-                    case 6:
+                    case 6://Problem 6: Print Spooler with Priority Re-Insertion
                         break;
 
-                    case 7:
+                    case 7://Problem 7: Reverse a Sentence Word by Word
                         break;
 
-                    case 8:
+                    case 8://Problem 8: Multi-Level Undo with Redo
                         break;
 
-                    case 9:
+                    case 9://Problem 9: Ticket Counter Simulation 
                         break;
 
-                    case 10:
+                    case 10://Problem 10: Order Processing Pipeline with Statistics
                         break;
 
                     case 0:
+                        exit= true;
                         break;
 
                     default:
