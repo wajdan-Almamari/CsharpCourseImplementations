@@ -31,7 +31,7 @@ namespace MiniFlightManagementSystem
         // Passenger names on the standby waitlist
         static Queue<string> waitlistQueue = new Queue<string>();
 
-        public static void RegisterNewPassenger()
+            public static void RegisterNewPassenger()
             {
                 Console.Write("Enter passenger name: ");
                 string EnterpassengerName = Console.ReadLine();
@@ -214,65 +214,6 @@ namespace MiniFlightManagementSystem
                 Console.WriteLine("Flight: " + flight);
                 Console.WriteLine("Date: " + date);
             }
-            public static void UpdateBookingMenu()
-            {
-                // Sub-menu code
-                bool back = false;
-
-                while (back == false)
-                {
-                    Console.WriteLine("1. Change flight only");
-                    Console.WriteLine("2. Change date only");
-                    Console.WriteLine("3. Change both");
-                    Console.WriteLine("0. Cancel update");
-
-                    Console.Write("Enter your choice: ");
-                    int choice = int.Parse(Console.ReadLine());
-                    string currentFlight = parts[0];
-                    string currentDate = parts[1];
-                switch (choice)
-                    {
-                        case 1:
-                            Console.WriteLine("Change flight only");
-                            // Display flights
-                            for (int i = 0; i < flightNumbers.Length; i++)
-                            {
-                                Console.WriteLine((i + 1) + ". " + flightNumbers[i]);
-                            }
-                            Console.Write("Select new flight: ");
-                            int flightChoice = int.Parse(Console.ReadLine());
-                            if (flightChoice < 1 || flightChoice > flightNumbers.Length)
-                            {
-                            Console.WriteLine("Invalid flight choice.");
-                            return;
-                         }
-                        // Keep old date, change flight only
-                        currentFlight = newFlight;
-
-                        back = true;
-                            break;
-
-                        case 2:
-                            Console.WriteLine("Change date only");
-                            back = true;
-                            break;
-
-                        case 3:
-                            Console.WriteLine("Change both");
-                            back = true;
-                            break;
-
-                        case 0:
-                            Console.WriteLine("Update cancelled.");
-                            back = true;
-                            break;
-
-                        default:
-                            Console.WriteLine("Invalid choice. Try again.");
-                            break;
-                    }
-                }
-            }
             public static void UpdateBooking()
             {
                 Console.Write("Enter Ticket ID: ");
@@ -298,13 +239,66 @@ namespace MiniFlightManagementSystem
                     Console.WriteLine("No booking found.");
                     return;
                 }
-                Console.WriteLine(bookingRecord[ticketID]);
-                UpdateBookingMenu();
+            // Get booking details from dictionary
+            string bookingValue = bookingRecord[ticketID];
+
+            // Split booking into flight and date
+            string[] parts = bookingValue.Split('|');
+
+            // Store current flight
+            string currentFlight = parts[0];
+
+            // Store current date
+            string currentDate = parts[1];
+
+            // Display current booking details
+            Console.WriteLine("Current Flight: " + currentFlight);
+            Console.WriteLine("Current Date: " + currentDate);
+
+            // Display update menu options
+            Console.WriteLine("\n1. Change flight only");
+            Console.WriteLine("2. Change date only");
+            Console.WriteLine("3. Change both");
+            Console.WriteLine("0. Cancel update");
+
+            // Read user choice
+            Console.Write("Enter your choice: ");
+            int choice = int.Parse(Console.ReadLine());
+
+            // Process user selection
+            switch (choice)
+            {
+                case 1:
+                    // Update flight only
+                    Console.WriteLine("Change flight only");
+                    break;
+
+                case 2:
+                    // Update date only
+                    Console.WriteLine("Change date only");
+                    break;
+
+                case 3:
+                    // Update flight and date
+                    Console.WriteLine("Change both");
+                    break;
+
+                case 0:
+                    // Cancel update process
+                    Console.WriteLine("Update cancelled.");
+                    return;
+
+                default:
+                    // Invalid menu option
+                    Console.WriteLine("Invalid choice.");
+                    return;
             }
+        }
 
 
             public static void showMenue()
             {
+                
                 Console.WriteLine("=======================================");
                 Console.WriteLine("\nSKY WINGS FLIGHT MANAGEMENT SYSTEM");
                 Console.WriteLine("=======================================");
@@ -327,7 +321,7 @@ namespace MiniFlightManagementSystem
                 bool exit = false;
                 while (exit == false)
                 {
-                    showMenue();
+                showMenue();
                     int enterChoise = int.Parse(Console.ReadLine());
                     switch (enterChoise)
                     {
