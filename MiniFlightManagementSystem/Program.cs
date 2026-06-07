@@ -271,16 +271,121 @@ namespace MiniFlightManagementSystem
                 case 1:
                     // Update flight only
                     Console.WriteLine("Change flight only");
-                    break;
+                    // Display available flights
+                    for (int i = 0; i < flightNumbers.Length; i++)
+                    {
+                        Console.WriteLine((i + 1) + ". " + flightNumbers[i]);
+                    }
 
+                    // Read new flight choice
+                    Console.Write("Select new flight: ");
+                    int flightChoice = int.Parse(Console.ReadLine());
+
+                    // Validate flight choice
+                    if (flightChoice < 1 || flightChoice > flightNumbers.Length)
+                    {
+                        Console.WriteLine("Invalid flight choice.");
+                        return;
+                    }
+
+                    // Get selected flight
+                    string newFlight = flightNumbers[flightChoice - 1];
+
+                    // Update booking with new flight and old date
+                    bookingRecord[ticketID] = newFlight + "|" + currentDate;
+
+                    // Display confirmation
+                    Console.WriteLine("Flight updated successfully.");
+                    Console.WriteLine("Old Flight: " + currentFlight);
+                    Console.WriteLine("New Flight: " + newFlight);
+                    break;
+            
                 case 2:
-                    // Update date only
                     Console.WriteLine("Change date only");
+
+                    // Display available dates
+                    for (int i = 0; i < availableDates.Count; i++)
+                    {
+                        Console.WriteLine((i + 1) + ". " + availableDates[i]);
+                    }
+
+                    // Read new date choice
+                    Console.Write("Select new date: ");
+                    int dateChoice = int.Parse(Console.ReadLine());
+
+                    // Validate date choice
+                    if (dateChoice < 1 || dateChoice > availableDates.Count)
+                    {
+                        Console.WriteLine("Invalid date choice.");
+                        return;
+                    }
+
+                    // Get selected date
+                    string newDate = availableDates[dateChoice - 1];
+
+                    // Update booking with old flight and new date
+                    bookingRecord[ticketID] = currentFlight + "|" + newDate;
+
+                    // Display confirmation
+                    Console.WriteLine("Date updated successfully.");
+                    Console.WriteLine("Old Date: " + currentDate);
+                    Console.WriteLine("New Date: " + newDate);
                     break;
 
                 case 3:
                     // Update flight and date
                     Console.WriteLine("Change both");
+
+                    // Display available flights
+                    for (int i = 0; i < flightNumbers.Length; i++)
+                    {
+                        Console.WriteLine((i + 1) + ". " + flightNumbers[i]);
+                    }
+
+                    // Read new flight choice
+                    Console.Write("Select new flight: ");
+                    int newFlightChoice = int.Parse(Console.ReadLine());
+
+                    // Validate flight choice
+                    if (newFlightChoice < 1 || newFlightChoice > flightNumbers.Length)
+                    {
+                        Console.WriteLine("Invalid flight choice.");
+                        return;
+                    }
+
+                    // Get selected flight
+                    string bothNewFlight = flightNumbers[newFlightChoice - 1];
+
+                    // Display available dates
+                    for (int i = 0; i < availableDates.Count; i++)
+                    {
+                        Console.WriteLine((i + 1) + ". " + availableDates[i]);
+                    }
+
+                    // Read new date choice
+                    Console.Write("Select new date: ");
+                    int newDateChoice = int.Parse(Console.ReadLine());
+
+                    // Validate date choice
+                    if (newDateChoice < 1 || newDateChoice > availableDates.Count)
+                    {
+                        Console.WriteLine("Invalid date choice.");
+                        return;
+                    }
+
+                    // Get selected date
+                    string bothNewDate = availableDates[newDateChoice - 1];
+
+                    // Update booking with new flight and new date
+                    bookingRecord[ticketID] = bothNewFlight + "|" + bothNewDate;
+
+                    // Display confirmation
+                    Console.WriteLine("Booking updated successfully.");
+                    Console.WriteLine("Old Flight: " + currentFlight);
+                    Console.WriteLine("New Flight: " + bothNewFlight);
+                    Console.WriteLine("Old Date: " + currentDate);
+                    Console.WriteLine("New Date: " + bothNewDate);
+
                     break;
 
                 case 0:
