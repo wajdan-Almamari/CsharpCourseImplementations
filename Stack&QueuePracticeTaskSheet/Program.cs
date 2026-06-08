@@ -460,7 +460,13 @@ namespace Stack_QueuePracticeTaskSheet
             }
             Console.WriteLine("Total Tickets Processed: " + totalTickets);
         }
+        public static void OrderProcessingPipelinewithStatistics()
+        {
+            Queue<string> orderQueue=new Queue<string>();
+            string highestOrder;
+            string lowestOrder; 
 
+        }
 
             static void Main(string[] args)
         {
@@ -508,6 +514,7 @@ namespace Stack_QueuePracticeTaskSheet
                         break;
 
                     case 10://Problem 10: Order Processing Pipeline with Statistics
+                        
                         break;
 
                     case 0:
