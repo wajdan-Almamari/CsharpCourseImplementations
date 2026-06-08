@@ -399,7 +399,7 @@ namespace MiniFlightManagementSystem
                     return;
             }
         }
-        public static void CencelTicket()
+            public static void CencelTicket()
         {
             // Ask user to enter a ticket ID
             Console.Write("Enter a ticket ID : ");
@@ -434,7 +434,53 @@ namespace MiniFlightManagementSystem
             Console.WriteLine("Ticket cancelled successfully.");
             Console.WriteLine("Passenger Name: " + passengerName);
             Console.WriteLine("Ticket ID: " + ticketID);
-        }
+
+            // Check if passenger exists in the check-in queue
+            if (checkedInQueue.Contains(passengerName))
+            {
+                // Create a temporary queue
+                Queue<string> tempQueue = new Queue<string>();
+
+                // Process all passengers in the queue
+                while (checkedInQueue.Count > 0)
+                {
+                    
+                    string currentPassenger = checkedInQueue.Dequeue();// Remove first passenger from original queue
+
+
+                    if (currentPassenger != passengerName)// Add passenger to temp queue if not cancelled passenger
+                    {
+                        tempQueue.Enqueue(currentPassenger);
+                    }
+                }
+                
+                checkedInQueue = tempQueue;// Replace original queue with updated queue
+               
+                Console.WriteLine(passengerName + " was removed from the check-in queue."); // Display confirmation message
+            }
+               // Check if passenger exists in boarding stack
+            if (boardingStack.Contains(passengerName))
+            {
+                // Create temporary stack
+                Stack<string> tempStack = new Stack<string>();
+
+                // Remove all passengers from original stack
+                while (boardingStack.Count > 0)
+                {
+                    // Get top passenger
+                    string currentPassenger = boardingStack.Pop();
+
+                    // Keep all passengers except cancelled passenger
+                    if (currentPassenger != passengerName)
+                    {
+                        tempStack.Push(currentPassenger);
+                    }
+                  
+                    Console.WriteLine(passengerName + " was removed from the boarding stack.");
+                }
+            }
+            }
+           
 
         public static void showMenue()
             {
