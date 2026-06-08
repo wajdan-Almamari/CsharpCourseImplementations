@@ -97,6 +97,8 @@ namespace MiniFlightManagementSystem
                 Console.WriteLine("Total Passengers: " + passengerNames.Count);
                 Console.WriteLine("=======================================");
 
+
+
             }
             public static void BookFlightTicket()
             {
@@ -109,19 +111,22 @@ namespace MiniFlightManagementSystem
                     return;
                 }
                 // Check if ticket is cancelled
-                if (cancelledTickets.Contains(ticketID))
-                {
-                    Console.WriteLine("This ticket has been cancelled.");
-                    return;
-                }
+               
                 // Check if ticket already has a booking
                 if (bookingRecord.ContainsKey(ticketID))
                 {
                     Console.WriteLine("Ticket already booked.");
                     return;
-                }
-                // Display available flights
-                Console.WriteLine("\nAvailable Flights:");
+            }
+
+            if (cancelledTickets.Contains(ticketID))
+            {
+                Console.WriteLine("This ticket has been cancelled beforer and now you will proceed to another booking.");
+                return;
+            }
+
+            // Display available flights
+            Console.WriteLine("\nAvailable Flights:");
                 for (int i = 0; i < flightNumbers.Length; i++)
                 {
                     Console.WriteLine((i + 1) + ". " + flightNumbers[i]);
@@ -154,7 +159,7 @@ namespace MiniFlightManagementSystem
 
                 // Save booking in dictionary
                 bookingRecord.Add(ticketID, selectedFlight + "|" + selectedDate);
-
+                cancelledTickets.Remove(ticketID);
                 // Find passenger name using ticket index
                 int passengerIndex = ticketNumbers.IndexOf(ticketID);
 
@@ -480,7 +485,72 @@ namespace MiniFlightManagementSystem
                 }
             }
             }
-           
+            public static void PassengerCheckIn()
+        {
+            Console.WriteLine("(1) Check in a passenger"); 
+            Console.WriteLine("(2) View check-in queue"); 
+            Console.WriteLine("(3) Process next passenger"); 
+            Console.WriteLine("(0) Back.");
+            Console.Write("Enter your choice: ");
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Check in a passenger");
+                    Console.Write("Enter Ticket ID: ");
+                    string ticketID = Console.ReadLine();
+                    // Check if ticket exists
+                    if (ticketNumbers.Contains(ticketID)==false)
+                    {
+                        Console.WriteLine("Ticket not found.");
+                        return;
+                    }
+                    if (cancelledTickets.Contains(ticketID) == true)
+                    {
+                        Console.WriteLine("This ticket has been cancelled.");
+                        return;
+                    }
+                    if (bookingRecord.ContainsKey(ticketID)== false)
+                    {
+                        Console.WriteLine("No booking found for this ticket.");
+                        return;
+                    }
+                    int passengerIndex = ticketNumbers.IndexOf(ticketID);
+                    string passengerName = passengerNames[passengerIndex];
+
+                    if (checkedInQueue.Contains(ticketID))
+                    {
+                        Console.WriteLine("Passenger already in check-in queue.");
+                        return;
+                    }
+                    if (checkedInQueue.Count > 0)
+                    {
+                        
+                    }
+            
+                    
+                    break;
+
+                case 2:
+                    Console.WriteLine("View check-in queue");
+                    break;
+
+                case 3:
+                    Console.WriteLine("Process next passenger");
+                    break;
+
+                case 0:
+                    Console.WriteLine("Back to main menu");
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    return;
+            }
+        }
+
+
 
         public static void showMenue()
             {
@@ -530,6 +600,7 @@ namespace MiniFlightManagementSystem
                             CencelTicket();
                             break;
                         case 7://7. Passenger Check-In
+                            PassengerCheckIn();
                             break;
                         case 8://8. Board Passengers (Boarding Stack
                             break;
