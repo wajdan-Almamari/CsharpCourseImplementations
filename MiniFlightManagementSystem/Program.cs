@@ -4,7 +4,7 @@ namespace MiniFlightManagementSystem
         internal class Program
         {
         // 5 passenger names
-        static List<string> passengerNames = new List<string>() { "Wajdan", "Ali", "Ahmed", "Sara", "Fatma" };
+        static List<string> passengerNames = new List<string>() { "Wajdan", "Hidya", "Rahaf", "Baraa", "Hafisa" };
 
         // 5 ticket IDs matching passengerNames index
         static List<string> ticketNumbers = new List<string>() { "TKT-001", "TKT-002", "TKT-003", "TKT-004", "TKT-005" };
@@ -418,9 +418,25 @@ namespace MiniFlightManagementSystem
                 Console.WriteLine("Ticket already cancelled.");
                 return;
             }
+            // Find passenger index using ticket ID
+            int passengerIndex = ticketNumbers.IndexOf(ticketID);
+
+            // Get passenger name from the same index
+            string passengerName = passengerNames[passengerIndex];
+            if (bookingRecord.ContainsKey(ticketID))
+            {
+                Console.WriteLine("Booking was removed: " + bookingRecord[ticketID]);
+
+                bookingRecord.Remove(ticketID);
+            }
+            // Add ticket to cancelled tickets list
+            cancelledTickets.Add(ticketID);
+            Console.WriteLine("Ticket cancelled successfully.");
+            Console.WriteLine("Passenger Name: " + passengerName);
+            Console.WriteLine("Ticket ID: " + ticketID);
         }
 
-            public static void showMenue()
+        public static void showMenue()
             {
                 
                 Console.WriteLine("=======================================");
@@ -465,6 +481,7 @@ namespace MiniFlightManagementSystem
                             UpdateBooking();
                             break;
                         case 6://6. Cancel a Ticket
+                            CencelTicket();
                             break;
                         case 7://7. Passenger Check-In
                             break;
