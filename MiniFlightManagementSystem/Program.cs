@@ -77,7 +77,7 @@ namespace MiniFlightManagementSystem
 
                 // Display table header
                 Console.WriteLine("No.".PadRight(5) + " | " + "Passenger Name".PadRight(22) + " | " + "Ticket ID".PadRight(22) + " | " + "Status");
-                Console.WriteLine("===============================================================================================================");
+                Console.WriteLine("======================================================");
 
                 // Loop through all passengers
                 for (int index = 0; index < passengerNames.Count; index++)
@@ -399,7 +399,26 @@ namespace MiniFlightManagementSystem
                     return;
             }
         }
+        public static void CencelTicket()
+        {
+            // Ask user to enter a ticket ID
+            Console.Write("Enter a ticket ID : ");
+            string ticketID = Console.ReadLine();
 
+            // Check if ticket ID exists in the ticket list
+            if (!ticketNumbers.Contains(ticketID))
+            {
+                Console.WriteLine("Ticket ID not found.");
+                return;
+            }
+
+            // Check if ticket has already been cancelled
+            if (cancelledTickets.Contains(ticketID))
+            {
+                Console.WriteLine("Ticket already cancelled.");
+                return;
+            }
+        }
 
             public static void showMenue()
             {
