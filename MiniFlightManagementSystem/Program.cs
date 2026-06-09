@@ -541,10 +541,7 @@ namespace MiniFlightManagementSystem
 
                 case 2:
                     Console.WriteLine("View check-in queue");
-                    foreach(int view in checkedInQueue)
-                    {
-                        Console.WriteLine(view);
-                    }
+                    
                     break;
 
                 case 3:
