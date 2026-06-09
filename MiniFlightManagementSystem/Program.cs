@@ -121,8 +121,9 @@ namespace MiniFlightManagementSystem
 
             if (cancelledTickets.Contains(ticketID))
             {
-                Console.WriteLine("This ticket has been cancelled beforer and now you will proceed to another booking.");
-                return;
+                cancelledTickets.Add(ticketID);
+                //Console.WriteLine("This ticket has been cancelled beforer and now you will proceed to another booking.");
+               // return;
             }
 
             // Display available flights
@@ -519,25 +520,36 @@ namespace MiniFlightManagementSystem
                     int passengerIndex = ticketNumbers.IndexOf(ticketID);
                     string passengerName = passengerNames[passengerIndex];
 
-                    if (checkedInQueue.Contains(ticketID))
+                    if (checkedInQueue.Contains(passengerName))
                     {
                         Console.WriteLine("Passenger already in check-in queue.");
                         return;
                     }
-                    if (checkedInQueue.Count > 0)
+                    if (checkedInQueue.Count > 10)
                     {
-                        
+                        checkedInQueue.Enqueue(passengerName);
+                        Console.WriteLine(passengerName + " checked in successfully.");
                     }
-            
-                    
+                    if (checkedInQueue.Count < 10)
+                    {
+                        waitlistQueue.Enqueue(passengerName);
+                        Console.WriteLine(passengerName + " checked in waiting list.");
+                    }
+                  
+
                     break;
 
                 case 2:
                     Console.WriteLine("View check-in queue");
+                    foreach(int view in checkedInQueue)
+                    {
+                        Console.WriteLine(view);
+                    }
                     break;
 
                 case 3:
                     Console.WriteLine("Process next passenger");
+
                     break;
 
                 case 0:
