@@ -77,19 +77,25 @@ namespace MiniFlightManagementSystem
                     return;
                 }
 
-                // Check if the passenger already exists in the list
-                for (int i = 0; i < passengerNames.Count; i++)
-                {
-                    // Compare names ignoring uppercase and lowercase letters
-                    if (EnterpassengerName.ToLower().Trim() == passengerNames[i].ToLower().Trim())
-                    {
-                        Console.WriteLine("Passenger already exists.");
-                        return;
-                    }
-                }//end of for
+            // Check if the passenger already exists in the list
+            for (int i = 0; i < passengerNames.Count; i++)
+            {
+                //    // Compare names ignoring uppercase and lowercase letters
+                //    if (EnterpassengerName.ToLower().Trim() == passengerNames[i].ToLower().Trim())
+                //    {
+                //        Console.WriteLine("Passenger already exists.");
+                //        return;
+                //    }
 
-                // Generate new ticket ID
-                string ticketID = "TKT-" + (ticketNumbers.Count + 1).ToString("000");
+                // LINQ
+                if (passengerNames.Any(i => i.ToLower().Trim() == EnterpassengerName.ToLower().Trim()))
+                {
+                    Console.WriteLine("Passenger already exists.");
+                    return;
+                }
+            }//end of for
+             // Generate new ticket ID
+            string ticketID = "TKT-" + (ticketNumbers.Count + 1).ToString("000");
 
                 // Add passenger name and ticket ID at the same index
                 passengerNames.Add(EnterpassengerName);
