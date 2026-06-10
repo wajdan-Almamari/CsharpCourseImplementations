@@ -1,4 +1,7 @@
 ﻿using System.Net.Sockets;
+using System;
+using System.IO;
+using System.Linq;
 namespace MiniFlightManagementSystem
 {
         internal class Program
@@ -33,6 +36,34 @@ namespace MiniFlightManagementSystem
 
         static int currentRow = 10;
         static char currentSeat = 'A';
+
+        // Save passenger names to a text file
+        public static void SavePassengers()
+        {
+            File.WriteAllLines("Passengers.txt", passengerNames);
+        }
+        // Load passenger names from file
+        public static void LoadPassengers()
+        {
+            if (File.Exists("Passengers.txt"))
+            {
+                passengerNames = File.ReadAllLines("Passengers.txt").ToList();
+            }
+        }
+        // Save ticket numbers to file
+        public static void SaveTickets()
+        {
+            File.WriteAllLines("Tickets.txt", ticketNumbers);
+        }
+
+        // Load ticket numbers from file
+            public static void LoadTickets()
+        {
+            if (File.Exists("Tickets.txt"))
+            {
+                ticketNumbers = File.ReadAllLines("Tickets.txt").ToList();
+            }
+        }
             public static bool TicketExists(string ticketID)
         {
             if (!ticketNumbers.Contains(ticketID))
@@ -100,9 +131,10 @@ namespace MiniFlightManagementSystem
                 // Add passenger name and ticket ID at the same index
                 passengerNames.Add(EnterpassengerName);
                 ticketNumbers.Add(ticketID);
-
-                // Display success message
-                Console.WriteLine("Passenger registered successfully.");
+                SavePassengers();
+                SaveTickets();
+            // Display success message
+            Console.WriteLine("Passenger registered successfully.");
                 Console.WriteLine("Passenger Name: " + EnterpassengerName);
                 Console.WriteLine("Ticket ID: " + ticketID);
             }
@@ -591,6 +623,7 @@ namespace MiniFlightManagementSystem
                 Console.Clear();
             }
         }
+            
             public static void BoardPassengers()
         {
             bool back = false;
@@ -650,7 +683,11 @@ namespace MiniFlightManagementSystem
 
                         Console.WriteLine("Passenger boarded: " + boardedPassenger);
                         Console.WriteLine("Assigned Seat: " + seat);
-
+                        // Save boarding record to a text file
+                        using (StreamWriter writer = new StreamWriter("BoardingLog.txt", true))
+                        {
+                            writer.WriteLine(boardedPassenger + " -> Seat " + seat);
+                        }
                         // Move to next seat
                         if (currentSeat == 'F')
                         {
@@ -735,13 +772,18 @@ namespace MiniFlightManagementSystem
             }
             static void Main(string[] args)
             {
-                bool exit = false;
+            LoadPassengers();
+            LoadTickets();
+            bool exit = false;
                 while (exit == false)
                 {
+              
                 showMenue();
-                    int enterChoise = int.Parse(Console.ReadLine());
+                 
+                int enterChoise = int.Parse(Console.ReadLine());
                     switch (enterChoise)
                     {
+                     
                         case 1://1. Register New Passenger
                             RegisterNewPassenger();
                             break;
