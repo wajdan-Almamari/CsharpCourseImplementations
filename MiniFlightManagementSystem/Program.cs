@@ -690,11 +690,12 @@ namespace MiniFlightManagementSystem
                             break; 
                         }
 
-                        foreach (KeyValuePair<string, string> passenger in passengerSeatMap)
-                        {
-                            Console.WriteLine(passenger.Key + " -> Seat " + passenger.Value);
-                        }
-
+                        //foreach (KeyValuePair<string, string> passenger in passengerSeatMap)
+                        //{
+                        //    Console.WriteLine(passenger.Key + " -> Seat " + passenger.Value);
+                        //}
+                        // LINQ 
+                        var boardedPassengers = passengerSeatMap.Select(p => p.Key).ToList();
                         break;
 
                     case 0:
