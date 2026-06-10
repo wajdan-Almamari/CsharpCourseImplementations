@@ -31,7 +31,9 @@ namespace MiniFlightManagementSystem
         // Passenger names on the standby waitlist
         static Queue<string> waitlistQueue = new Queue<string>();
 
-            public static void RegisterNewPassenger()
+        static int currentRow = 10;
+        static char currentSeat = 'A';
+        public static void RegisterNewPassenger()
             {
                 Console.Write("Enter passenger name: ");
                 string EnterpassengerName = Console.ReadLine();
@@ -486,207 +488,225 @@ namespace MiniFlightManagementSystem
                 }
             }
             }
-            public static void PassengerCheckIn()
+        public static void PassengerCheckIn()
         {
-            Console.WriteLine("(1) Check in a passenger"); 
-            Console.WriteLine("(2) View check-in queue"); 
-            Console.WriteLine("(3) Process next passenger"); 
-            Console.WriteLine("(0) Back.");
-            Console.Write("Enter your choice: ");
-            int choice = int.Parse(Console.ReadLine());
+            bool back1 = false;
 
-            switch (choice)
+            while (back1 == false)
             {
-                case 1:
-                    Console.WriteLine("Check in a passenger");
-                    Console.Write("Enter Ticket ID: ");
-                    string ticketID = Console.ReadLine();
-                    // Check if ticket exists
-                    if (ticketNumbers.Contains(ticketID)==false)
-                    {
-                        Console.WriteLine("Ticket not found.");
-                        return;
-                    }
-                    if (cancelledTickets.Contains(ticketID) == true)
-                    {
-                        Console.WriteLine("This ticket has been cancelled.");
-                        return;
-                    }
-                    if (bookingRecord.ContainsKey(ticketID)== false)
-                    {
-                        Console.WriteLine("No booking found for this ticket.");
-                        return;
-                    }
-                    int passengerIndex = ticketNumbers.IndexOf(ticketID);
-                    string passengerName = passengerNames[passengerIndex];
+                Console.WriteLine("(1) Check in a passenger");
+                Console.WriteLine("(2) View check-in queue");
+                Console.WriteLine("(3) Process next passenger");
+                Console.WriteLine("(0) Back.");
+                Console.Write("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine());
 
-                    if (checkedInQueue.Contains(passengerName))
-                    {
-                        Console.WriteLine("Passenger already in check-in queue.");
-                        return;
-                    }
-                    if (checkedInQueue.Count < 10)
-                    {
-                        checkedInQueue.Enqueue(passengerName);
-                        Console.WriteLine(passengerName + " checked in successfully.");
-                    }
-                    else
-                    {
-                        waitlistQueue.Enqueue(passengerName);
-                        Console.WriteLine(passengerName + " checked in waiting list.");
-                    }
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Check in a passenger");
+                        Console.Write("Enter Ticket ID: ");
+                        string ticketID = Console.ReadLine();
+                        // Check if ticket exists
+                        if (ticketNumbers.Contains(ticketID) == false)
+                        {
+                            Console.WriteLine("Ticket not found.");
+                            break;
+                        }
+                        if (cancelledTickets.Contains(ticketID) == true)
+                        {
+                            Console.WriteLine("This ticket has been cancelled.");
+                            return;
+                        }
+                        if (bookingRecord.ContainsKey(ticketID) == false)
+                        {
+                            Console.WriteLine("No booking found for this ticket.");
+                            return;
+                        }
+                        int passengerIndex = ticketNumbers.IndexOf(ticketID);
+                        string passengerName = passengerNames[passengerIndex];
+
+                        if (checkedInQueue.Contains(passengerName))
+                        {
+                            Console.WriteLine("Passenger already in check-in queue.");
+                            return;
+                        }
+                        if (checkedInQueue.Count < 10)
+                        {
+                            checkedInQueue.Enqueue(passengerName);
+                            Console.WriteLine(passengerName + " checked in successfully.");
+                        }
+                        else
+                        {
+                            waitlistQueue.Enqueue(passengerName);
+                            Console.WriteLine(passengerName + " checked in waiting list.");
+                        }
 
 
-                    break;
+                        break;
 
-                case 2:
-                    Console.WriteLine("View check-in queue");
-                    int pos = 1;
-                    foreach (string p in checkedInQueue)
-                    {
-                        Console.WriteLine(pos + ". " + p);
-                        pos++;
-                    }
-                    Console.WriteLine("WaitList count: " + waitlistQueue.Count);
-                    break;
+                    case 2:
+                        Console.WriteLine("View check-in queue");
+                        int pos = 1;
+                        foreach (string p in checkedInQueue)
+                        {
+                            Console.WriteLine(pos + ". " + p);
+                            pos++;
+                        }
+                        Console.WriteLine("WaitList count: " + waitlistQueue.Count);
+                        break;
 
-                case 3:
-                    Console.WriteLine("Process next passenger");
-                    if (checkedInQueue.Count == 0)
-                    {
-                        Console.WriteLine("Queue is empty");
-                        return;
-                    }
-                    string frontPassanger = checkedInQueue.Dequeue();
-                    Console.WriteLine("Processed: " + frontPassanger);
+                    case 3:
+                        Console.WriteLine("Process next passenger");
+                        if (checkedInQueue.Count == 0)
+                        {
+                            Console.WriteLine("Queue is empty");
+                            break;
+                        }
+                        string frontPassanger = checkedInQueue.Dequeue();
+                        Console.WriteLine("Processed: " + frontPassanger);
 
-                    if (waitlistQueue.Count > 0)
-                    {
-                        string nextPassenger = waitlistQueue.Dequeue();
-                        checkedInQueue.Enqueue(nextPassenger);
-                        Console.WriteLine(nextPassenger + "Moved from wait List to check in queue..");
-                    }
-                    break;
+                        if (waitlistQueue.Count > 0)
+                        {
+                            string nextPassenger = waitlistQueue.Dequeue();
+                            checkedInQueue.Enqueue(nextPassenger);
+                            Console.WriteLine(nextPassenger + "Moved from wait List to check in queue..");
+                        }
+                        break;
 
-                case 0:
-                    Console.WriteLine("Back to main menu");
-                    return;
+                    case 0:
+                        Console.WriteLine("Back to main menu");
+                        back1 = true;
 
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    return;
+                       break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                       break;
+                }
+                Console.WriteLine("Press Any Key To Continue .....");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
-
         public static void BoardPassengers()
         {
-            Console.WriteLine("1. Load boarding stack from check-in queue");
-            Console.WriteLine("2. Board next passenger");
-            Console.WriteLine("3. View boarding stack");
-            Console.WriteLine("4. View boarding log");
-            Console.WriteLine("0. Back");
+            bool back = false;
 
-            Console.Write("Enter your choice: ");
-            int choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
+            while (back == false)
             {
-                case 1:
-                    // Load passengers from check-in queue to boarding stack
-                    if (checkedInQueue.Count == 0 && boardingStack.Count > 0)
-                    {
-                        Console.WriteLine("Boarding stack already loaded.");
-                        return;
-                    }
+                Console.WriteLine("1. Load boarding stack from check-in queue");
+                Console.WriteLine("2. Board next passenger");
+                Console.WriteLine("3. View boarding stack");
+                Console.WriteLine("4. View boarding log");
+                Console.WriteLine("0. Back");
 
-                    if (checkedInQueue.Count == 0)
-                    {
-                        Console.WriteLine("No passengers in check-in queue.");
-                        return;
-                    }
+                Console.Write("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine());
 
-                    int loadedCount = 0;
+                switch (choice)
+                {
+                    case 1:
+                        // Load passengers from check-in queue to boarding stack
+                        if (checkedInQueue.Count == 0 && boardingStack.Count > 0)
+                        {
+                            Console.WriteLine("Boarding stack already loaded.");
+                            break;
+                        }
 
-                    while (checkedInQueue.Count > 0)
-                    {
-                        string passengerName = checkedInQueue.Dequeue();
-                        boardingStack.Push(passengerName);
-                        loadedCount++;
-                    }
+                        if (checkedInQueue.Count == 0)
+                        {
+                            Console.WriteLine("No passengers in check-in queue.");
+                            break;
+                        }
 
-                    Console.WriteLine("Loaded passengers: " + loadedCount);
-                    break;
+                        int loadedCount = 0;
 
-                case 2:
-                    // Board next passenger from stack
-                    if (boardingStack.Count == 0)
-                    {
-                        Console.WriteLine("No passengers in boarding stack.");
-                        return;
-                    }
+                        while (checkedInQueue.Count > 0)
+                        {
+                            string passengerName = checkedInQueue.Dequeue();
+                            boardingStack.Push(passengerName);
+                            loadedCount++;
+                        }
 
-                    string boardedPassenger = boardingStack.Pop();
+                        Console.WriteLine("Loaded passengers: " + loadedCount);
+                        break;
 
-                    string seat = currentRow.ToString() + currentSeat;
+                    case 2:
+                        // Board next passenger from stack
+                        if (boardingStack.Count == 0)
+                        {
+                            Console.WriteLine("No passengers in boarding stack.");
+                            break;
+                        }
 
-                    passengerSeatMap[boardedPassenger] = seat;
+                        string boardedPassenger = boardingStack.Pop();
 
-                    Console.WriteLine("Passenger boarded: " + boardedPassenger);
-                    Console.WriteLine("Assigned Seat: " + seat);
+                        string seat = currentRow.ToString() + currentSeat;
 
-                    // Move to next seat
-                    if (currentSeat == 'F')
-                    {
-                        currentSeat = 'A';
-                        currentRow++;
-                    }
-                    else
-                    {
-                        currentSeat++;
-                    }
+                        passengerSeatMap[boardedPassenger] = seat;
 
-                    break;
+                        Console.WriteLine("Passenger boarded: " + boardedPassenger);
+                        Console.WriteLine("Assigned Seat: " + seat);
 
-                case 3:
-                    // View boarding stack without removing passengers
-                    if (boardingStack.Count == 0)
-                    {
-                        Console.WriteLine("Boarding stack is empty.");
-                        return;
-                    }
+                        // Move to next seat
+                        if (currentSeat == 'F')
+                        {
+                            currentSeat = 'A';
+                            currentRow++;
+                        }
+                        else
+                        {
+                            currentSeat++;
+                        }
 
-                    int position = 1;
+                        break;
 
-                    foreach (string passenger in boardingStack)
-                    {
-                        Console.WriteLine(position + ". " + passenger);
-                        position++;
-                    }
+                    case 3:
+                        // View boarding stack without removing passengers
+                        if (boardingStack.Count == 0)
+                        {
+                            Console.WriteLine("Boarding stack is empty.");
+                            break;
+                        }
 
-                    break;
+                        int position = 1;
 
-                case 4:
-                    // View boarding log
-                    if (passengerSeatMap.Count == 0)
-                    {
-                        Console.WriteLine("No passengers boarded yet.");
-                        return;
-                    }
+                        foreach (string passenger in boardingStack)
+                        {
+                            Console.WriteLine(position + ". " + passenger);
+                            position++;
+                        }
 
-                    foreach (KeyValuePair<string, string> passenger in passengerSeatMap)
-                    {
-                        Console.WriteLine(passenger.Key + " -> Seat " + passenger.Value);
-                    }
+                        break;
 
-                    break;
+                    case 4:
+                        // View boarding log
+                        if (passengerSeatMap.Count == 0)
+                        {
+                            Console.WriteLine("No passengers boarded yet.");
+                            break; 
+                        }
 
-                case 0:
-                    Console.WriteLine("Back to main menu.");
-                    return;
+                        foreach (KeyValuePair<string, string> passenger in passengerSeatMap)
+                        {
+                            Console.WriteLine(passenger.Key + " -> Seat " + passenger.Value);
+                        }
 
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    return;
+                        break;
+
+                    case 0:
+                        Console.WriteLine("Back to main menu.");
+                        back = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
+                Console.WriteLine("Press Any Key To Continue .....");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
