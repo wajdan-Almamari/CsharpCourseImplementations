@@ -31,7 +31,9 @@ namespace MiniFlightManagementSystem
         // Passenger names on the standby waitlist
         static Queue<string> waitlistQueue = new Queue<string>();
 
-            public static void RegisterNewPassenger()
+        static int currentRow = 10;
+        static char currentSeat = 'A';
+        public static void RegisterNewPassenger()
             {
                 Console.Write("Enter passenger name: ");
                 string EnterpassengerName = Console.ReadLine();
@@ -559,7 +561,117 @@ namespace MiniFlightManagementSystem
             }
         }
 
+        public static void BoardPassengers()
+        {
+            Console.WriteLine("1. Load boarding stack from check-in queue");
+            Console.WriteLine("2. Board next passenger");
+            Console.WriteLine("3. View boarding stack");
+            Console.WriteLine("4. View boarding log");
+            Console.WriteLine("0. Back");
 
+            Console.Write("Enter your choice: ");
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    // Load passengers from check-in queue to boarding stack
+                    if (checkedInQueue.Count == 0 && boardingStack.Count > 0)
+                    {
+                        Console.WriteLine("Boarding stack already loaded.");
+                        return;
+                    }
+
+                    if (checkedInQueue.Count == 0)
+                    {
+                        Console.WriteLine("No passengers in check-in queue.");
+                        return;
+                    }
+
+                    int loadedCount = 0;
+
+                    while (checkedInQueue.Count > 0)
+                    {
+                        string passengerName = checkedInQueue.Dequeue();
+                        boardingStack.Push(passengerName);
+                        loadedCount++;
+                    }
+
+                    Console.WriteLine("Loaded passengers: " + loadedCount);
+                    break;
+
+                case 2:
+                    // Board next passenger from stack
+                    if (boardingStack.Count == 0)
+                    {
+                        Console.WriteLine("No passengers in boarding stack.");
+                        return;
+                    }
+
+                    string boardedPassenger = boardingStack.Pop();
+
+                    string seat = currentRow.ToString() + currentSeat;
+
+                    passengerSeatMap[boardedPassenger] = seat;
+
+                    Console.WriteLine("Passenger boarded: " + boardedPassenger);
+                    Console.WriteLine("Assigned Seat: " + seat);
+
+                    // Move to next seat
+                    if (currentSeat == 'F')
+                    {
+                        currentSeat = 'A';
+                        currentRow++;
+                    }
+                    else
+                    {
+                        currentSeat++;
+                    }
+
+                    break;
+
+                case 3:
+                    // View boarding stack without removing passengers
+                    if (boardingStack.Count == 0)
+                    {
+                        Console.WriteLine("Boarding stack is empty.");
+                        return;
+                    }
+
+                    int position = 1;
+
+                    foreach (string passenger in boardingStack)
+                    {
+                        Console.WriteLine(position + ". " + passenger);
+                        position++;
+                    }
+
+                    break;
+
+                case 4:
+                    // View boarding log
+                    if (passengerSeatMap.Count == 0)
+                    {
+                        Console.WriteLine("No passengers boarded yet.");
+                        return;
+                    }
+
+                    foreach (KeyValuePair<string, string> passenger in passengerSeatMap)
+                    {
+                        Console.WriteLine(passenger.Key + " -> Seat " + passenger.Value);
+                    }
+
+                    break;
+
+                case 0:
+                    Console.WriteLine("Back to main menu.");
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    return;
+            }
+        }
 
         public static void showMenue()
             {
@@ -612,6 +724,7 @@ namespace MiniFlightManagementSystem
                             PassengerCheckIn();
                             break;
                         case 8://8. Board Passengers (Boarding Stack
+                            BoardPassengers();
                             break;
                         case 9://9. Generate Flight Manifest
                             break;
