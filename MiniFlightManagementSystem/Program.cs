@@ -31,9 +31,7 @@ namespace MiniFlightManagementSystem
         // Passenger names on the standby waitlist
         static Queue<string> waitlistQueue = new Queue<string>();
 
-        static int currentRow = 10;
-        static char currentSeat = 'A';
-        public static void RegisterNewPassenger()
+            public static void RegisterNewPassenger()
             {
                 Console.Write("Enter passenger name: ");
                 string EnterpassengerName = Console.ReadLine();
@@ -527,28 +525,47 @@ namespace MiniFlightManagementSystem
                         Console.WriteLine("Passenger already in check-in queue.");
                         return;
                     }
-                    if (checkedInQueue.Count > 10)
+                    if (checkedInQueue.Count < 10)
                     {
                         checkedInQueue.Enqueue(passengerName);
                         Console.WriteLine(passengerName + " checked in successfully.");
                     }
-                    if (checkedInQueue.Count < 10)
+                    else
                     {
                         waitlistQueue.Enqueue(passengerName);
                         Console.WriteLine(passengerName + " checked in waiting list.");
                     }
-                  
+
 
                     break;
 
                 case 2:
                     Console.WriteLine("View check-in queue");
-                    
+                    int pos = 1;
+                    foreach (string p in checkedInQueue)
+                    {
+                        Console.WriteLine(pos + ". " + p);
+                        pos++;
+                    }
+                    Console.WriteLine("WaitList count: " + waitlistQueue.Count);
                     break;
 
                 case 3:
                     Console.WriteLine("Process next passenger");
+                    if (checkedInQueue.Count == 0)
+                    {
+                        Console.WriteLine("Queue is empty");
+                        return;
+                    }
+                    string frontPassanger = checkedInQueue.Dequeue();
+                    Console.WriteLine("Processed: " + frontPassanger);
 
+                    if (waitlistQueue.Count > 0)
+                    {
+                        string nextPassenger = waitlistQueue.Dequeue();
+                        checkedInQueue.Enqueue(nextPassenger);
+                        Console.WriteLine(nextPassenger + "Moved from wait List to check in queue..");
+                    }
                     break;
 
                 case 0:
