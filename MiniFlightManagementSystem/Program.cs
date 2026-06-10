@@ -33,7 +33,39 @@ namespace MiniFlightManagementSystem
 
         static int currentRow = 10;
         static char currentSeat = 'A';
-        public static void RegisterNewPassenger()
+            public static bool TicketExists(string ticketID)
+        {
+            if (!ticketNumbers.Contains(ticketID))
+            {
+                Console.WriteLine("Ticket not found.");
+                return false;
+            }
+            return true;
+        }
+            public static bool NotCancelled(string ticketID)
+        {
+            if (cancelledTickets.Contains(ticketID))
+            {
+                Console.WriteLine("This ticket has been cancelled.");
+                return false;
+            }
+            return true;
+        }
+            public static bool BookingExists(string ticketID)
+        {
+            if (!bookingRecord.ContainsKey(ticketID))
+            {
+                Console.WriteLine("No booking found for this ticket.");
+                return false;
+            }
+            return true;
+        }
+            public static string GetPassengerName(string ticketID)
+        {
+            int passengerIndex = ticketNumbers.IndexOf(ticketID);
+            return passengerNames[passengerIndex];
+        }
+            public static void RegisterNewPassenger()
             {
                 Console.Write("Enter passenger name: ");
                 string EnterpassengerName = Console.ReadLine();
@@ -177,40 +209,17 @@ namespace MiniFlightManagementSystem
             {
                 Console.WriteLine("Enter tickit ID : ");
                 string ticketId = Console.ReadLine();
-                // Check if ticket exists
-                if (!ticketNumbers.Contains(ticketId))
-                {
-                    Console.WriteLine("Ticket not found.");
-                    return;
-                }
-                // Get passenger name using ticket index
-                int passengerIndex = ticketNumbers.IndexOf(ticketId);
-                string passengerName = passengerNames[passengerIndex];
-                // Check if ticket is cancelled
-                if (!ticketNumbers.Contains(ticketId))
-                {
-                    Console.WriteLine("Ticket not found.");
-                    return;
-                }
-                // Check if ticket is cancelled
-                if (cancelledTickets.Contains(ticketId))
-                {
-                    Console.WriteLine("This ticket has been cancelled.");
-                    return;
-                }
+            // Check if ticket exists
+            if (!TicketExists(ticketId)) return;
+            if (!NotCancelled(ticketId)) return;
+            if (!BookingExists(ticketId)) return;
 
-                // Check if booking exists
-                if (!bookingRecord.ContainsKey(ticketId))
-                {
-                    Console.WriteLine("No booking found for this ticket.");
-                    return;
-                }
+            string passengerName = GetPassengerName(ticketId);
 
-                // Get booking value from dictionary
-                string bookingValue = bookingRecord[ticketId];
-
-                // Split flight and date
-                string[] bookingParts = bookingValue.Split('|');
+            // Get booking value from dictionary
+            string bookingValue = bookingRecord[ticketId];
+            // Split flight and date
+            string[] bookingParts = bookingValue.Split('|');
 
                 string flight = bookingParts[0];
                 string date = bookingParts[1];
@@ -488,7 +497,7 @@ namespace MiniFlightManagementSystem
                 }
             }
             }
-        public static void PassengerCheckIn()
+            public static void PassengerCheckIn()
         {
             bool back1 = false;
 
@@ -508,24 +517,11 @@ namespace MiniFlightManagementSystem
                         Console.Write("Enter Ticket ID: ");
                         string ticketID = Console.ReadLine();
                         // Check if ticket exists
-                        if (ticketNumbers.Contains(ticketID) == false)
-                        {
-                            Console.WriteLine("Ticket not found.");
-                            break;
-                        }
-                        if (cancelledTickets.Contains(ticketID) == true)
-                        {
-                            Console.WriteLine("This ticket has been cancelled.");
-                            return;
-                        }
-                        if (bookingRecord.ContainsKey(ticketID) == false)
-                        {
-                            Console.WriteLine("No booking found for this ticket.");
-                            return;
-                        }
-                        int passengerIndex = ticketNumbers.IndexOf(ticketID);
-                        string passengerName = passengerNames[passengerIndex];
+                        if (!TicketExists(ticketID)) break;
+                        if (!NotCancelled(ticketID)) break;
+                        if (!BookingExists(ticketID)) break;
 
+                        string passengerName = GetPassengerName(ticketID);
                         if (checkedInQueue.Contains(passengerName))
                         {
                             Console.WriteLine("Passenger already in check-in queue.");
@@ -589,7 +585,7 @@ namespace MiniFlightManagementSystem
                 Console.Clear();
             }
         }
-        public static void BoardPassengers()
+            public static void BoardPassengers()
         {
             bool back = false;
 
@@ -710,7 +706,7 @@ namespace MiniFlightManagementSystem
             }
         }
 
-        public static void showMenue()
+            public static void showMenue()
             {
                 
                 Console.WriteLine("=======================================");
