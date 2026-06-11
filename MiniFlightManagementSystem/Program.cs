@@ -43,11 +43,36 @@ namespace MiniFlightManagementSystem
             File.WriteAllLines("Passengers.txt", passengerNames);
         }
         // Load passenger names from file
-        public static void LoadPassengers()
+        // Load passenger names from file
+        static void LoadPassengers()
         {
-            if (File.Exists("Passengers.txt"))
+            try
             {
-                passengerNames = File.ReadAllLines("Passengers.txt").ToList();
+                if (!File.Exists("Passengers.txt"))
+                    return;
+
+                using (StreamReader reader = new StreamReader("Passengers.txt"))
+                {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] passengers = line.Split(",");
+
+                        foreach (string passenger in passengers)
+                        {
+                            passengerNames.Add(passenger.Trim());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nAn unexpected error occurred:");
+                Console.WriteLine(ex.Message);
+
+                Console.WriteLine("\nPress Enter to continue...");
+                Console.ReadLine();
             }
         }
         // Save ticket numbers to file
@@ -55,6 +80,7 @@ namespace MiniFlightManagementSystem
         {
             File.WriteAllLines("Tickets.txt", ticketNumbers);
         }
+
 
         // Load ticket numbers from file
             public static void LoadTickets()
@@ -151,9 +177,9 @@ namespace MiniFlightManagementSystem
                 Console.WriteLine("No.".PadRight(5) + " | " + "Passenger Name".PadRight(22) + " | " + "Ticket ID".PadRight(22) + " | " + "Status");
                 Console.WriteLine("======================================================");
 
-                // Loop through all passengers
-                for (int index = 0; index < passengerNames.Count; index++)
-                {
+            // Loop through all passengers
+              for (int index = 0; index < ticketNumbers.Count; index++)
+            {
                     // Default passenger status
                     string status = "Active";
                     // Check if the ticket has been cancelled
@@ -809,7 +835,13 @@ namespace MiniFlightManagementSystem
                             BoardPassengers();
                             break;
                         case 9://9. Generate Flight Manifest
-                            break;
+                        static void Swap(ref int a, ref int b)
+                        { int temp = a; a = b; b = temp; }
+                        int x = 10, y = 20;
+                        Console.WriteLine(x);
+                        Swap(ref x, ref y);
+                        Console.WriteLine(x);
+                        break;
                         case 10://10. Manage Waitlist & Seat Assignment
                             break;
                         case 0://0. Exit
