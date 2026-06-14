@@ -37,42 +37,40 @@ namespace MiniFlightManagementSystem
         static int currentRow = 10;
         static char currentSeat = 'A';
 
-        // Save passenger names to a text file
+      
+        // Save passenger names and ticket numbers to a text file
         public static void SavePassengers()
         {
-            File.WriteAllLines("Passengers.txt", passengerNames);
+            List<string> passengerLine = passengerNames
+                .Select((name, index) => name + "|" + ticketNumbers[index])
+                .ToList();
+
+            File.WriteAllLines("Passengers.txt", passengerLine);
         }
-        // Load passenger names from file
+
         // Load passenger names from file
         static void LoadPassengers()
         {
-            try
+            if (!File.Exists("Passengers.txt"))
+                return;
+
+            passengerNames.Clear();
+            ticketNumbers.Clear();
+
+            using (StreamReader reader = new StreamReader("Passengers.txt"))
             {
-                if (!File.Exists("Passengers.txt"))
-                    return;
+                string line;
 
-                using (StreamReader reader = new StreamReader("Passengers.txt"))
+                while ((line = reader.ReadLine()) != null)
                 {
-                    string line;
+                    string[] parts = line.Split('|');
 
-                    while ((line = reader.ReadLine()) != null)
+                    if (parts.Length == 2)
                     {
-                        string[] passengers = line.Split(",");
-
-                        foreach (string passenger in passengers)
-                        {
-                            passengerNames.Add(passenger.Trim());
-                        }
+                        passengerNames.Add(parts[0].Trim());
+                        ticketNumbers.Add(parts[1].Trim());
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\nAn unexpected error occurred:");
-                Console.WriteLine(ex.Message);
-
-                Console.WriteLine("\nPress Enter to continue...");
-                Console.ReadLine();
             }
         }
         // Save ticket numbers to file
@@ -157,8 +155,8 @@ namespace MiniFlightManagementSystem
                 // Add passenger name and ticket ID at the same index
                 passengerNames.Add(EnterpassengerName);
                 ticketNumbers.Add(ticketID);
-                SavePassengers();
-                SaveTickets();
+            SavePassengers();
+
             // Display success message
             Console.WriteLine("Passenger registered successfully.");
                 Console.WriteLine("Passenger Name: " + EnterpassengerName);
@@ -175,7 +173,6 @@ namespace MiniFlightManagementSystem
 
                 // Display table header
                 Console.WriteLine("No.".PadRight(5) + " | " + "Passenger Name".PadRight(22) + " | " + "Ticket ID".PadRight(22) + " | " + "Status");
-                Console.WriteLine("======================================================");
 
             // Loop through all passengers
               for (int index = 0; index < ticketNumbers.Count; index++)
@@ -190,9 +187,9 @@ namespace MiniFlightManagementSystem
                     // Display passenger information
                     Console.WriteLine((index + 1).ToString().PadRight(5) + " | " + passengerNames[index].PadRight(22) + " | " + ticketNumbers[index].PadRight(22) + " | " + status);
                 }
-                // Display total number of passengers
+            // Display total number of passengers
 
-                Console.WriteLine("Total Passengers: " + passengerNames.Count);
+            Console.WriteLine("Total Passengers: " + passengerNames.Count);
                 Console.WriteLine("=======================================");
 
 
