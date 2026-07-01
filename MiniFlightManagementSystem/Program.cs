@@ -839,7 +839,7 @@ namespace MiniFlightManagementSystem
                         Swap(ref x, ref y);
                         Console.WriteLine(x);
                         break;
-                        case 10://10. Manage Waitlist & Seat Assignment
+                        case 10://10. Manage Waitlist & Seat Assignment          
                             break;
                         case 0://0. Exit
                             exit = true;

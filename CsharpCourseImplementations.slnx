@@ -1,11 +1,13 @@
 <Solution>
   <Project Path="ArraysPracticeTaskSheet/ArraysPracticeTaskSheet.csproj" Id="d945ba19-a073-483f-a9e9-209cbbda0106" />
   <Project Path="ClinicManagementSystem(CMS)/ClinicManagementSystem(CMS).csproj" />
+  <Project Path="E-Commerce SystemERD&amp;Models/E-Commerce SystemERD&amp;Models.csproj" Id="4912864a-dc30-4767-9e93-7850cdcd5ca8" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
   <Project Path="HotelManagement-ListTasks/HotelManagement-ListTasks.csproj" Id="4c703cc8-282b-4b79-a331-4120bee3a7a5" />
   <Project Path="HotelManagementSystem/HotelManagementSystem.csproj" Id="ad861b22-57d5-4e74-b04c-40ca30e1b9e1" />
   <Project Path="LibraryManagementSystem/LibraryManagementSystem.csproj" Id="435ddc6b-6f5a-445d-9eab-1ceabee59d77" />
   <Project Path="List-PracticeTask/List-PracticeTask.csproj" Id="34567927-d19b-49f1-a06e-5cca88d49849" />
   <Project Path="MiniFlightManagementSystem/MiniFlightManagementSystem.csproj" Id="d0e3abf7-b0fc-411d-b742-7a28f7935495" />
+  <Project Path="OOP/OOP.csproj" Id="87efccbb-1d4e-4b3f-b396-73cefe4f9ec0" />
   <Project Path="Stack&amp;QueuePracticeTaskSheet/Stack&amp;QueuePracticeTaskSheet.csproj" Id="fb2f579d-b999-4a1e-b350-3a907d293043" />
 </Solution>
