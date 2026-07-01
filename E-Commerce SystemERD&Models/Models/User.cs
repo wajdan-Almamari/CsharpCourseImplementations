@@ -10,11 +10,11 @@ using System.Xml.Linq;
 namespace E_Commerce_SystemERD_Models.Models
 {
     [Index(nameof(username), IsUnique = true)]
+    [Index(nameof(email), IsUnique = true)]
     public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         public int userId { get; set; } //auto-generated
         [Required]
         [MaxLength(50)]
