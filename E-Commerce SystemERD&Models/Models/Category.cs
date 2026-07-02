@@ -18,11 +18,11 @@ namespace E_Commerce_SystemERD_Models.Models
             [MaxLength(100)]
             public string categoryName { get; set; } // user input
 
-            [MaxLength(500)]
+            [StringLength(500)]
             public string? description { get; set; } // user input
 
-            [MaxLength(300)]
+            [StringLength(300)]
             public string? imageUrl { get; set; } // user input
         }
     }
-}
+
